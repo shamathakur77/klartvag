@@ -728,11 +728,13 @@ function showExpatPath() {
     return;
   }
 
-  // Update header title with selected path
-  const titleEl = resultEl.querySelector('.your-path-header h2 span[data-lang="en"]');
-  const metaEl = resultEl.querySelector('.path-meta span[data-lang="en"]');
-  if (titleEl) titleEl.textContent = 'Your path: ' + path.title;
-  if (metaEl) metaEl.textContent = path.meta;
+  // Update header title across all language spans
+  resultEl.querySelectorAll('.your-path-header h2 span').forEach(el => {
+    el.textContent = 'Your path: ' + path.title;
+  });
+  resultEl.querySelectorAll('.path-meta span').forEach(el => {
+    el.textContent = path.meta;
+  });
 
   // Show/hide warning or note banners
   const existingBanner = resultEl.querySelector('.path-dynamic-banner');
