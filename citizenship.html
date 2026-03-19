@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swedish Citizenship 2026 — Klartväg</title>
+<meta name="description" content="Swedish citizenship requirements changing 6 June 2026. 8-year rule, language test, income requirement, civics test. Personal eligibility checker and transition timeline calculator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── COUNTDOWN ── */
+.countdown-strip {
+  background: #0d1f0d;
+  color: white;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+.countdown-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+.countdown-date {
+  font-family: 'Source Serif 4', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: white;
+}
+.countdown-blocks {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+.countdown-block {
+  text-align: center;
+}
+.countdown-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1;
+  color: #7dff7d;
+  display: block;
+  min-width: 52px;
+}
+.countdown-unit {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  display: block;
+}
+.countdown-sep {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 28px;
+  color: rgba(255,255,255,0.2);
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.countdown-block2 {
+  margin-left: 40px;
+}
+.countdown-num2 {
+  color: var(--swedish-yellow);
+}
+
+/* ── BEFORE/AFTER TABLE ── */
+.ba-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+.ba-table th {
+  background: var(--bg2);
+  padding: 10px 16px;
+  text-align: left;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+.ba-table th.before { color: var(--red); background: #fdf0f0; }
+.ba-table th.after { color: var(--green); background: #f0fdf0; }
+.ba-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+  color: var(--ink2);
+  background: white;
+}
+.ba-table td.requirement {
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 12px;
+  width: 22%;
+}
+.ba-table td.changed {
+  background: #fffbf0;
+}
+.change-pill {
+  display: inline-block;
+  font-size: 9px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  margin-left: 6px;
+  background: var(--warn-bg);
+  color: var(--warn);
+  border: 1px solid #ffcc8060;
+  vertical-align: middle;
+}
+.new-pill {
+  background: var(--green-light);
+  color: var(--green);
+  border-color: #a0d0b060;
+}
+
+/* ── ELIGIBILITY CHECKER ── */
+.checker-result {
+  display: none;
+  margin-top: 20px;
+}
+.result-band {
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.result-band h3 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.result-band .result-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+.timeline-visual {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.tl-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.tl-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--swedish-blue);
+  flex-shrink: 0;
+}
+.tl-dot.future { background: var(--border2); border: 2px solid var(--border); }
+.tl-dot.deadline { background: var(--warn); }
+.tl-dot.target { background: var(--green); }
+.tl-label {
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--ink3);
+  text-align: center;
+  max-width: 70px;
+  line-height: 1.3;
+}
+.tl-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  min-width: 20px;
+  max-width: 80px;
+}
+.tl-line.filled { background: var(--swedish-blue); }
+
+/* ── EXCEPTION TABLE ── */
+.exception-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.exception-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 16px;
+}
+.exception-years {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--swedish-blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.exception-label {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+/* ── TEST TIMELINE ── */
+.test-timeline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.test-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+}
+.test-card.confirmed { border-left: 3px solid var(--green); }
+.test-card.delayed { border-left: 3px solid var(--warn); }
+.test-when {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.test-card.confirmed .test-when { color: var(--green); }
+.test-card.delayed .test-when { color: var(--warn); }
+.test-name {
+  font-family: 'Source Serif 4', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.test-desc { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .countdown-strip { padding: 20px 16px; gap: 16px; }
+  .countdown-num { font-size: 28px; }
+  .ba-table { font-size: 12px; }
+  .ba-table td.requirement { width: auto; }
+  .test-timeline { grid-template-columns: 1fr; }
+  .countdown-block2 { margin-left: 0; }
+}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+<!-- DUAL COUNTDOWN -->
+<div class="countdown-strip">
+  <div>
+    <div class="countdown-label">
+      <span data-lang="en">New citizenship law enters force</span>
+      <span data-lang="sv">Ny medborgarskapslag träder i kraft</span>
+      <span data-lang="ar">قانون المواطنة الجديد يدخل حيز التنفيذ</span>
+      <span data-lang="uk">Новий закон про громадянство набирає чинності</span>
+    </div>
+    <div class="countdown-date">6 June 2026 — Sweden's National Day</div>
+  </div>
+  <div class="countdown-blocks">
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-days">--</span>
+      <span class="countdown-unit">days</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-hours">--</span>
+      <span class="countdown-unit">hours</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-mins">--</span>
+      <span class="countdown-unit">mins</span>
+    </div>
+  </div>
+  <div class="countdown-block countdown-block2">
+    <div class="countdown-label" style="margin-bottom:6px">
+      <span data-lang="en">First civics test</span>
+      <span data-lang="sv">Första medborgarskapstest</span>
+      <span data-lang="ar">أول اختبار مدني</span>
+      <span data-lang="uk">Перший тест з громадянознавства</span>
+    </div>
+    <span class="countdown-num countdown-num2" id="cd-test-days">--</span>
+    <span class="countdown-unit">days — August 2026</span>
+  </div>
+</div>
+
+<div class="app page-enter">
+
+  <div class="breadcrumb">
+    <a href="index.html" class="bc-item">
+      <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+    </a>
+    <span class="bc-sep">›</span>
+    <span class="bc-item current">
+      <span data-lang="en">Swedish Citizenship 2026</span>
+      <span data-lang="sv">Svenskt medborgarskap 2026</span>
+      <span data-lang="ar">الجنسية السويدية 2026</span>
+      <span data-lang="uk">Шведське громадянство 2026</span>
+    </span>
+  </div>
+
+  <!-- CRITICAL WARNING -->
+  <div style="background:#7a1a1a; color:white; padding:20px 28px; margin-bottom:0">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7; margin-bottom:6px">
+      <span data-lang="en">Largest reform in 50 years — affects pending applications</span>
+      <span data-lang="sv">Största reformen på 50 år — påverkar pågående ansökningar</span>
+      <span data-lang="ar">أكبر إصلاح منذ 50 عاماً — يؤثر على الطلبات المعلقة</span>
+      <span data-lang="uk">Найбільша реформа за 50 років — впливає на поточні заяви</span>
+    </div>
+    <div style="font-family:'Source Serif 4',serif; font-size:19px; font-weight:300; line-height:1.5">
+      <span data-lang="en">If your citizenship application is <strong>not decided before 6 June 2026</strong>, it will be assessed under the new, stricter rules — regardless of when you applied. Average processing time is currently <strong>47 months</strong>.</span>
+      <span data-lang="sv">Om din medborgarskapsansökan <strong>inte är beslutad före den 6 juni 2026</strong> kommer den att bedömas enligt de nya, strängare reglerna — oavsett när du ansökte. Genomsnittlig handläggningstid är för närvarande <strong>47 månader</strong>.</span>
+      <span data-lang="ar">إذا لم يُبَتّ في طلب جنسيتك <strong>قبل 6 يونيو 2026</strong>، فسيُقيَّم وفق القواعد الجديدة الأكثر صرامة — بصرف النظر عن وقت تقديمك. متوسط وقت المعالجة حالياً <strong>47 شهراً</strong>.</span>
+      <span data-lang="uk">Якщо ваша заява на громадянство <strong>не буде розглянута до 6 червня 2026 року</strong>, вона буде оцінена за новими, суворішими правилами — незалежно від дати подачі. Середній час обробки наразі становить <strong>47 місяців</strong>.</span>
+    </div>
+  </div>
+
+  <div class="official-source" style="margin-top:0; border-top:none">
+    <div class="official-source-label">Official Source — Government Bill + Migrationsverket</div>
+    <a href="https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html" target="_blank">migrationsverket.se → Apply for Swedish citizenship</a>
+    <a href="https://www.government.se/press-releases/2025/01/inquiry-proposes-more-stringent-swedish-citizenship-requirements/" target="_blank">government.se → Stricter requirements for Swedish citizenship (January 2025)</a>
+    <div class="last-checked">Law confirmed. Enters force 6 June 2026. Source: EY Sweden / The Local Sweden / government.se. Last verified March 2026.</div>
+  </div>
+
+  <!-- SECTION 1: BEFORE / AFTER TABLE -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">What is changing — exact requirements before and after 6 June 2026</span>
+    <span data-lang="sv">Vad som förändras — exakta krav före och efter 6 juni 2026</span>
+    <span data-lang="ar">ما الذي يتغير — المتطلبات الدقيقة قبل وبعد 6 يونيو 2026</span>
+    <span data-lang="uk">Що змінюється — точні вимоги до і після 6 червня 2026</span>
+  </div>
+
+  <div style="overflow-x:auto">
+    <table class="ba-table">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th class="before">Before 6 June 2026</th>
+          <th class="after">From 6 June 2026 <span class="change-pill" style="color:var(--warn)">NEW LAW</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="requirement">Residency period</td>
+          <td><strong>5 years</strong> continuous lawful residence (main rule)</td>
+          <td class="changed"><strong>8 years</strong> continuous lawful residence (main rule) <span class="change-pill">+3 years</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Language requirement</td>
+          <td>No formal test required. Basic Swedish conversation assessed informally at interview.</td>
+          <td class="changed"><strong>Mandatory Swedish language test.</strong> First test: autumn 2027 (delayed). <span class="change-pill new-pill">NEW</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Civics knowledge</td>
+          <td>No formal test. Basic understanding of Swedish society expected informally.</td>
+          <td class="changed"><strong>Mandatory civics test</strong> (samhällskunskapstest). First test: August 2026. <span class="change-pill new-pill">NEW</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Income / self-sufficiency</td>
+          <td>No income requirement. Financial situation not assessed.</td>
+          <td class="changed"><strong>Min. SEK 20,850/month gross</strong> (3 × income base amount = SEK 250,200/year). Must not have received income support for more than 6 months in the 3 years prior to application. <span class="change-pill new-pill">NEW</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Conduct requirement</td>
+          <td>Must have led an orderly (skötsam) life. No debts with the Enforcement Authority.</td>
+          <td class="changed">Stricter "honourable lifestyle" (hederligt levnadssätt) requirement. Crime waiting periods significantly extended — e.g. 4-year prison sentence = <strong>15-year wait</strong> before citizenship eligibility. <span class="change-pill">STRICTER</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Permanent residence</td>
+          <td>Required for main-rule applicants. Permanent residence on asylum grounds valid.</td>
+          <td class="changed">Still required. Note: separate proposal (not yet law) would revoke asylum-based permanent residence from 2027 — register citizenship intent by 31 Dec 2026 to preserve rights. <span class="change-pill">WATCH</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Children (under 18)</td>
+          <td>Processed with parent's application or by notification.</td>
+          <td class="changed">New specific rules for children. Conduct requirement from age 15. Knowledge requirement from age 16. Consent required from age 12 in certain cases. <span class="change-pill new-pill">NEW</span></td>
+        </tr>
+        <tr>
+          <td class="requirement">Pending applications</td>
+          <td>Assessed under rules in force when decided.</td>
+          <td class="changed"><strong>Any application not decided before 6 June 2026 will be assessed under new rules.</strong> Applying early does not guarantee old rules apply. <span class="change-pill">CRITICAL</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="unknown-box">
+    <div class="unknown-label">
+      <span data-lang="en">What Klartväg cannot tell you</span>
+      <span data-lang="sv">Vad Klartväg inte kan berätta</span>
+      <span data-lang="ar">ما لا يستطيع كلارتفاغ إخبارك به</span>
+      <span data-lang="uk">Що Klartväg не може вам сказати</span>
+    </div>
+    <p>
+      <span data-lang="en">Whether the new rules will apply to your specific pending application depends on when Migrationsverket decides your case — Klartväg cannot predict this. For legal advice on transitional provisions contact a qualified Swedish immigration lawyer or Migrationsverket directly: 0771-235 235.</span>
+      <span data-lang="sv">Om de nya reglerna gäller din specifika pågående ansökan beror på när Migrationsverket beslutar i ditt ärende. Kontakta en kvalificerad migrationsadvokat eller Migrationsverket: 0771-235 235.</span>
+      <span data-lang="ar">ما إذا كانت القواعد الجديدة تنطبق على طلبك المعلق يعتمد على وقت قرار ميغراتيونسفيركيت في قضيتك. اتصل بمحامي هجرة مؤهل أو بميغراتيونسفيركيت مباشرةً: 235 235-771.</span>
+      <span data-lang="uk">Чи застосовуватимуться нові правила до вашої конкретної заяви, що знаходиться на розгляді, залежить від того, коли Міграційне агентство вирішить вашу справу. Зверніться до кваліфікованого адвоката з питань міграції або до Міграційного агентства: 0771-235 235.</span>
+    </p>
+  </div>
+
+  <!-- SECTION 2: EXCEPTIONS -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">Exceptions to the 8-year rule — you may qualify sooner</span>
+    <span data-lang="sv">Undantag från 8-årsregeln — du kan kvalificera dig tidigare</span>
+    <span data-lang="ar">استثناءات من قاعدة 8 سنوات — قد تكون مؤهلاً في وقت أقرب</span>
+    <span data-lang="uk">Винятки з правила 8 років — ви можете претендувати раніше</span>
+  </div>
+
+  <div class="exception-grid">
+    <div class="exception-card">
+      <div class="exception-years">2 yrs</div>
+      <div class="exception-label">
+        <span data-lang="en">Nordic citizens (Denmark, Finland, Iceland, Norway)</span>
+        <span data-lang="sv">Nordiska medborgare (Danmark, Finland, Island, Norge)</span>
+        <span data-lang="ar">المواطنون الشماليون (الدنمارك، فنلندا، أيسلندا، النرويج)</span>
+        <span data-lang="uk">Громадяни Скандинавії (Данія, Фінляндія, Ісландія, Норвегія)</span>
+      </div>
+    </div>
+    <div class="exception-card">
+      <div class="exception-years">2 yrs</div>
+      <div class="exception-label">
+        <span data-lang="en">Former Swedish citizens who lost citizenship</span>
+        <span data-lang="sv">Tidigare svenska medborgare som förlorade medborgarskap</span>
+        <span data-lang="ar">المواطنون السويديون السابقون الذين فقدوا جنسيتهم</span>
+        <span data-lang="uk">Колишні шведські громадяни, які втратили громадянство</span>
+      </div>
+    </div>
+    <div class="exception-card">
+      <div class="exception-years">3 yrs</div>
+      <div class="exception-label">
+        <span data-lang="en">Married to / cohabiting with a Swedish citizen (with 2-year cohabitation requirement)</span>
+        <span data-lang="sv">Gift med / samboende med en svensk medborgare (med 2-års samboendekrav)</span>
+        <span data-lang="ar">متزوج من / يعيش مع مواطن سويدي (مع اشتراط العيش معاً لمدة سنتين)</span>
+        <span data-lang="uk">Одружений з / проживає з шведським громадянином (з вимогою 2-річного спільного проживання)</span>
+      </div>
+    </div>
+    <div class="exception-card">
+      <div class="exception-years">5 yrs</div>
+      <div class="exception-label">
+        <span data-lang="en">Stateless persons</span>
+        <span data-lang="sv">Statslösa personer</span>
+        <span data-lang="ar">عديمو الجنسية</span>
+        <span data-lang="uk">Особи без громадянства</span>
+      </div>
+    </div>
+    <div class="exception-card">
+      <div class="exception-years">5 yrs</div>
+      <div class="exception-label">
+        <span data-lang="en">Persons with formal refugee status declaration</span>
+        <span data-lang="sv">Personer med formell flyktingstatusförklaring</span>
+        <span data-lang="ar">الأشخاص الحاصلون على وضع اللاجئ الرسمي</span>
+        <span data-lang="uk">Особи з офіційним статусом біженця</span>
+      </div>
+    </div>
+    <div class="exception-card">
+      <div class="exception-years">≤21</div>
+      <div class="exception-label">
+        <span data-lang="en">Young adults under 21 — shorter residency period applies. Check migrationsverket.se for exact years.</span>
+        <span data-lang="sv">Unga vuxna under 21 — kortare boendetid gäller. Kontrollera migrationsverket.se.</span>
+        <span data-lang="ar">الشباب دون سن 21 — تنطبق فترة إقامة أقصر. تحقق من migrationsverket.se.</span>
+        <span data-lang="uk">Молоді дорослі до 21 року — застосовується коротший термін проживання.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="official-source">
+    <div class="official-source-label">Official Source — exceptions</div>
+    <a href="https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html" target="_blank">migrationsverket.se → Citizenship for adults — full eligibility rules</a>
+    <div class="last-checked">Last checked: March 2026. Verify exceptions at Migrationsverket for your specific situation.</div>
+  </div>
+
+  <!-- SECTION 3: TESTS -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">The two new tests — what, when, and what we know</span>
+    <span data-lang="sv">De två nya proven — vad, när och vad vi vet</span>
+    <span data-lang="ar">الاختباران الجديدان — ماذا ومتى وما نعرفه</span>
+    <span data-lang="uk">Два нові тести — що, коли і що ми знаємо</span>
+  </div>
+
+  <div class="test-timeline">
+    <div class="test-card confirmed">
+      <div class="test-when">
+        <span data-lang="en">August 2026 — confirmed</span>
+        <span data-lang="sv">Augusti 2026 — bekräftat</span>
+        <span data-lang="ar">أغسطس 2026 — مؤكد</span>
+        <span data-lang="uk">Серпень 2026 — підтверджено</span>
+      </div>
+      <div class="test-name">
+        <span data-lang="en">Civics Test</span>
+        <span data-lang="sv">Samhällskunskapstest</span>
+        <span data-lang="ar">اختبار المعرفة المدنية</span>
+        <span data-lang="uk">Тест з громадянознавства</span>
+      </div>
+      <div class="test-desc">
+        <span data-lang="en">Covers Sweden's democratic system, constitutional laws, and institutional structure. Migration minister Johan Forssell: "Not about which king took over in which year — it's things you need to succeed in Sweden, like how to participate in a general election."</span>
+        <span data-lang="sv">Täcker Sveriges demokratiska system, grundlagar och institutionella struktur. Inte om vilken kung tog över vilket år — utan saker du behöver för att lyckas i Sverige.</span>
+        <span data-lang="ar">يغطي النظام الديمقراطي السويدي والقوانين الدستورية. ليس عن التاريخ — بل عن ما تحتاجه للنجاح في السويد.</span>
+        <span data-lang="uk">Охоплює демократичну систему Швеції, конституційні закони. Не про королів — а про те, що потрібно для успіху в Швеції.</span>
+      </div>
+    </div>
+    <div class="test-card delayed">
+      <div class="test-when">
+        <span data-lang="en">Autumn 2027 — delayed</span>
+        <span data-lang="sv">Höst 2027 — försenat</span>
+        <span data-lang="ar">خريف 2027 — متأخر</span>
+        <span data-lang="uk">Осінь 2027 — затримано</span>
+      </div>
+      <div class="test-name">
+        <span data-lang="en">Swedish Language Test</span>
+        <span data-lang="sv">Svenskt språkprov</span>
+        <span data-lang="ar">اختبار اللغة السويدية</span>
+        <span data-lang="uk">Тест шведської мови</span>
+      </div>
+      <div class="test-desc">
+        <span data-lang="en">Mandatory Swedish language proficiency test. Originally planned for June 2026 but delayed — universities responsible said the timeline was impossible. First test now autumn 2027. Level and format not yet officially confirmed. Source: The Local Sweden / swedishcitizenship.se.</span>
+        <span data-lang="sv">Obligatoriskt svenskt språkprov. Ursprungligen planerat till juni 2026 men försenat — universiteten sa att tidsplanen var omöjlig. Första prov nu höst 2027.</span>
+        <span data-lang="ar">اختبار إلزامي للغة السويدية. تأجل من يونيو 2026 — الجامعات المسؤولة قالت إن الجدول الزمني كان مستحيلاً. أول اختبار خريف 2027 الآن.</span>
+        <span data-lang="uk">Обов'язковий тест шведської мови. Спочатку планувався на червень 2026, але затриманий — університети заявили, що терміни нереальні. Перший тест тепер восінь 2027.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="outdated-warning">
+    <span class="warn-icon">⚠</span>
+    <p>
+      <span data-lang="en">Test format, passing level, and registration process have not been officially confirmed by Migrationsverket as of March 2026. This page will be updated when official guidance is published. Always verify at migrationsverket.se before preparing for tests.</span>
+      <span data-lang="sv">Testformat, godkänningsnivå och registreringsprocess har inte officiellt bekräftats av Migrationsverket per mars 2026. Verifiera alltid på migrationsverket.se.</span>
+      <span data-lang="ar">لم يتم تأكيد تنسيق الاختبار ومستوى النجاح وعملية التسجيل رسمياً من قِبَل ميغراتيونسفيركيت حتى مارس 2026.</span>
+      <span data-lang="uk">Формат тесту, рівень успішності та процес реєстрації офіційно не підтверджені Міграційним агентством станом на березень 2026 року.</span>
+    </p>
+  </div>
+
+  <!-- SECTION 4: PERSONAL ELIGIBILITY CHECKER -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">Personal eligibility checker — where do you stand?</span>
+    <span data-lang="sv">Personlig behörighetskontroll — var befinner du dig?</span>
+    <span data-lang="ar">فاحص الأهلية الشخصي — أين تقف؟</span>
+    <span data-lang="uk">Особистий перевірник відповідності — яке ваше становище?</span>
+  </div>
+
+  <div class="situation-block">
+    <h2>
+      <span data-lang="en">Check your citizenship timeline</span>
+      <span data-lang="sv">Kontrollera din medborgarskapsplan</span>
+      <span data-lang="ar">تحقق من جدولك الزمني للجنسية</span>
+      <span data-lang="uk">Перевірте свій графік громадянства</span>
+    </h2>
+    <div class="sv-label">
+      <span data-lang="en">Based on official rules only. Not legal advice. Verify all output at migrationsverket.se.</span>
+      <span data-lang="sv">Baserat på officiella regler. Inte juridisk rådgivning. Verifiera allt på migrationsverket.se.</span>
+      <span data-lang="ar">استناداً إلى القواعد الرسمية فقط. ليس استشارة قانونية.</span>
+      <span data-lang="uk">На основі лише офіційних правил. Не є юридичною консультацією.</span>
+    </div>
+
+    <div class="question-row">
+      <span class="question-label">
+        <span data-lang="en">When did you first register as a resident in Sweden? (approximate)</span>
+        <span data-lang="sv">När folkbokförde du dig i Sverige? (ungefärligt)</span>
+        <span data-lang="ar">متى سجلت كمقيم في السويد؟ (تقريبي)</span>
+        <span data-lang="uk">Коли ви вперше зареєструвалися як резидент Швеції? (приблизно)</span>
+      </span>
+      <input type="month" id="arrival-date" min="2010-01" max="2026-03"
+        style="padding:10px 14px; border:1px solid var(--border2); background:white; font-family:'IBM Plex Sans',sans-serif; font-size:14px; color:var(--ink); width:220px">
+    </div>
+
+    <div class="question-row">
+      <span class="question-label">
+        <span data-lang="en">What is your situation?</span>
+        <span data-lang="sv">Vad är din situation?</span>
+        <span data-lang="ar">ما هو وضعك؟</span>
+        <span data-lang="uk">Яка ваша ситуація?</span>
+      </span>
+      <div class="option-chips" style="flex-direction:column; align-items:flex-start; gap:8px">
+        <div class="chip" onclick="selectChip(this,'cq1','main')">
+          <span data-lang="en">Work permit / general residence (main rule applies)</span>
+          <span data-lang="sv">Arbetstillstånd / allmänt uppehållstillstånd (huvudregeln gäller)</span>
+          <span data-lang="ar">تصريح عمل / إقامة عامة (تنطبق القاعدة الرئيسية)</span>
+          <span data-lang="uk">Дозвіл на роботу / загальний дозвіл на проживання (застосовується основне правило)</span>
+        </div>
+        <div class="chip" onclick="selectChip(this,'cq1','married')">
+          <span data-lang="en">Married to / cohabiting with a Swedish citizen</span>
+          <span data-lang="sv">Gift med / samboende med en svensk medborgare</span>
+          <span data-lang="ar">متزوج من / يعيش مع مواطن سويدي</span>
+          <span data-lang="uk">Одружений з / проживає з шведським громадянином</span>
+        </div>
+        <div class="chip" onclick="selectChip(this,'cq1','refugee')">
+          <span data-lang="en">Formal refugee status (flyktingstatus)</span>
+          <span data-lang="sv">Formell flyktingstatus</span>
+          <span data-lang="ar">وضع اللاجئ الرسمي (flyktingstatus)</span>
+          <span data-lang="uk">Офіційний статус біженця (flyktingstatus)</span>
+        </div>
+        <div class="chip" onclick="selectChip(this,'cq1','nordic')">
+          <span data-lang="en">Nordic citizen (Denmark, Finland, Iceland, Norway)</span>
+          <span data-lang="sv">Nordisk medborgare</span>
+          <span data-lang="ar">مواطن شمالي</span>
+          <span data-lang="uk">Громадянин Скандинавії</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question-row">
+      <span class="question-label">
+        <span data-lang="en">Do you currently have a permanent residence permit (permanent uppehållstillstånd)?</span>
+        <span data-lang="sv">Har du permanent uppehållstillstånd?</span>
+        <span data-lang="ar">هل لديك تصريح إقامة دائم؟</span>
+        <span data-lang="uk">Чи є у вас дозвіл на постійне проживання?</span>
+      </span>
+      <div class="option-chips">
+        <div class="chip" onclick="selectChip(this,'cq2','yes')">
+          <span data-lang="en">Yes</span><span data-lang="sv">Ja</span><span data-lang="ar">نعم</span><span data-lang="uk">Так</span>
+        </div>
+        <div class="chip" onclick="selectChip(this,'cq2','no')">
+          <span data-lang="en">No — still on temporary permit</span>
+          <span data-lang="sv">Nej — fortfarande tillfälligt tillstånd</span>
+          <span data-lang="ar">لا — لا أزال بتصريح مؤقت</span>
+          <span data-lang="uk">Ні — все ще маю тимчасовий дозвіл</span>
+        </div>
+        <div class="chip" onclick="selectChip(this,'cq2','unsure')">
+          <span data-lang="en">Not sure</span><span data-lang="sv">Vet inte</span><span data-lang="ar">غير متأكد</span><span data-lang="uk">Не впевнений</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="find-path-btn" id="cit-btn" onclick="calculateCitizenship()" disabled>
+      <span data-lang="en">Show my timeline →</span>
+      <span data-lang="sv">Visa min tidslinje →</span>
+      <span data-lang="ar">أظهر جدولي الزمني ←</span>
+      <span data-lang="uk">Показати мій графік →</span>
+    </button>
+
+    <!-- RESULT -->
+    <div class="checker-result" id="cit-result"></div>
+  </div>
+
+  <!-- SECTION 5: INCOME REQUIREMENT -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">The income requirement — exactly what you need to earn</span>
+    <span data-lang="sv">Inkomstkravet — exakt vad du behöver tjäna</span>
+    <span data-lang="ar">متطلبات الدخل — بالضبط ما تحتاج إلى كسبه</span>
+    <span data-lang="uk">Вимога до доходу — точно скільки потрібно заробляти</span>
+  </div>
+
+  <div class="situation-block" style="padding:24px">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-bottom:20px">
+      <div style="text-align:center; padding:20px; background:var(--bg); border:1px solid var(--border)">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:32px; font-weight:500; color:var(--swedish-blue); line-height:1">SEK 20,850</div>
+        <div style="font-size:11px; color:var(--ink3); margin-top:4px; letter-spacing:0.08em; text-transform:uppercase">Per month (gross, before tax)</div>
+      </div>
+      <div style="text-align:center; padding:20px; background:var(--bg); border:1px solid var(--border)">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:32px; font-weight:500; color:var(--swedish-blue); line-height:1">SEK 250,200</div>
+        <div style="font-size:11px; color:var(--ink3); margin-top:4px; letter-spacing:0.08em; text-transform:uppercase">Per year (gross, before tax)</div>
+      </div>
+      <div style="text-align:center; padding:20px; background:var(--bg); border:1px solid var(--border)">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:32px; font-weight:500; color:var(--swedish-blue); line-height:1">6 months</div>
+        <div style="font-size:11px; color:var(--ink3); margin-top:4px; letter-spacing:0.08em; text-transform:uppercase">Max income support received in past 3 years</div>
+      </div>
+    </div>
+
+    <div class="plain-language">
+      <div class="plain-language-label">Plain language</div>
+      <p>
+        <span data-lang="en">The income figure is 3 × the income base amount (inkomstbasbelopp). For 2026 this is SEK 83,400 × 3 = SEK 250,200/year. This figure is updated annually by the government. The income must come from salary or self-employment. Certain subsidised employment types do not count. The ability to support yourself must not be only temporary.</span>
+        <span data-lang="sv">Inkomstfiguren är 3 × inkomstbasbeloppet. För 2026 är detta 83 400 kr × 3 = 250 200 kr/år. Inkomsten måste komma från lön eller egenföretagande. Viss subventionerad sysselsättning räknas inte.</span>
+        <span data-lang="ar">رقم الدخل هو 3 × مبلغ الأساس الدخل. لعام 2026 هذا 83,400 كرونة × 3 = 250,200 كرونة/سنة. يجب أن يأتي الدخل من الراتب أو العمل الحر.</span>
+        <span data-lang="uk">Дохід = 3 × базова сума доходу. На 2026 рік це 83,400 × 3 = 250,200 крон/рік. Дохід повинен бути від зарплати або самозайнятості.</span>
+      </p>
+      <div class="plain-language-disclaimer">
+        <span data-lang="en">Simplified. Source: EY Sweden / Prop. 2025/26 (citizenship bill). The income base amount is updated annually — verify current figure at skatteverket.se.</span>
+        <span data-lang="sv">Förenklad. Källa: EY Sverige / Prop. 2025/26. Inkomstbasbeloppet uppdateras årligen — verifiera aktuell siffra på skatteverket.se.</span>
+      </div>
+    </div>
+
+    <div class="unknown-box" style="margin-top:0">
+      <div class="unknown-label">
+        <span data-lang="en">Exactly which income types count — outside scope of this tool</span>
+        <span data-lang="sv">Exakt vilka inkomsttyper som räknas — utanför det här verktygets räckvidd</span>
+      </div>
+      <p>
+        <span data-lang="en">The bill specifies that certain subsidised employment or income types will not count, but the final implementing regulations have not been published as of March 2026. Klartväg cannot determine whether your specific income qualifies. Verify with Migrationsverket or an immigration lawyer before applying.</span>
+        <span data-lang="sv">Klartväg kan inte avgöra om din specifika inkomst kvalificerar. Verifiera med Migrationsverket eller en migrationsadvokat innan du ansöker.</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 6: WHAT TO DO NOW -->
+  <div class="section-label" style="margin-top:32px">
+    <span data-lang="en">What to do now — action checklist</span>
+    <span data-lang="sv">Vad du ska göra nu — checklista</span>
+    <span data-lang="ar">ما يجب فعله الآن — قائمة التحقق</span>
+    <span data-lang="uk">Що робити зараз — контрольний список дій</span>
+  </div>
+
+  <div class="situation-block">
+    <ul class="checklist">
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>Check your residence start date.</strong> Folkbokföringsregistret is the official record. Log in via skatteverket.se with BankID to see your registration date. This is the date that counts — not when you arrived or when you got your permit.</span>
+          <span data-lang="sv"><strong>Kontrollera ditt folkbokföringsdatum.</strong> Logga in på skatteverket.se med BankID. Det är detta datum som räknas.</span>
+          <span data-lang="ar"><strong>تحقق من تاريخ إقامتك.</strong> سجّل الدخول عبر skatteverket.se باستخدام BankID لرؤية تاريخ تسجيلك.</span>
+          <span data-lang="uk"><strong>Перевірте дату реєстрації свого проживання.</strong> Увійдіть через skatteverket.se з BankID.</span>
+        </span>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>Confirm you have a permanent residence permit.</strong> Check your permit card or log into Migrationsverket's Mina Sidor. You cannot apply for citizenship without it.</span>
+          <span data-lang="sv"><strong>Bekräfta att du har permanent uppehållstillstånd.</strong> Kontrollera ditt tillståndskort eller logga in på Migrationsverkets Mina Sidor.</span>
+          <span data-lang="ar"><strong>تأكد من حصولك على تصريح إقامة دائم.</strong> تحقق من بطاقة تصريحك أو سجّل الدخول على Mina Sidor.</span>
+          <span data-lang="uk"><strong>Підтвердьте наявність дозволу на постійне проживання.</strong> Перевірте свою картку або увійдіть на Mina Sidor.</span>
+        </span>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>If you are on asylum-based permanent residence</strong> — the separate revocation proposal targets you specifically. Register your citizenship application or intent with Migrationsverket before 31 December 2026 to preserve your rights under the current proposal. This proposal is not yet law — verify current status at migrationsverket.se.</span>
+          <span data-lang="sv"><strong>Om du har asylbaserat permanent uppehållstillstånd</strong> — det separata återkallningsförslaget riktar sig specifikt mot dig. Registrera din medborgarskapsansökan eller avsikt hos Migrationsverket före den 31 december 2026.</span>
+          <span data-lang="ar"><strong>إذا كان لديك إقامة دائمة قائمة على اللجوء</strong> — مقترح الإلغاء يستهدفك تحديداً. سجّل طلب جنسيتك لدى ميغراتيونسفيركيت قبل 31 ديسمبر 2026.</span>
+          <span data-lang="uk"><strong>Якщо ви маєте постійний дозвіл на проживання на основі притулку</strong> — окрема пропозиція про скасування стосується саме вас. Зареєструйте заяву на громадянство до 31 грудня 2026.</span>
+        </span>
+        <span class="check-required">URGENT</span>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>Verify your income.</strong> Check that your gross salary or self-employment income meets SEK 20,850/month. Check your payslips and Skatteverket income records for the past 3 years.</span>
+          <span data-lang="sv"><strong>Kontrollera din inkomst.</strong> Kontrollera att din bruttolön uppgår till minst 20 850 kr/mån. Kontrollera lönebesked och Skatteverkets inkomstuppgifter för de senaste 3 åren.</span>
+          <span data-lang="ar"><strong>تحقق من دخلك.</strong> تأكد من أن راتبك الإجمالي يبلغ 20,850 كرونة/شهر على الأقل.</span>
+          <span data-lang="uk"><strong>Перевірте свій дохід.</strong> Переконайтеся, що ваша зарплата брутто або дохід від самозайнятості становить не менше 20,850 крон/місяць.</span>
+        </span>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>Start SFI or language preparation now.</strong> Even though the language test is delayed to autumn 2027, building Swedish beyond basic SFI level takes time. The test will likely require functional, confident Swedish — not just survival Swedish.</span>
+          <span data-lang="sv"><strong>Börja SFI eller språkförberedelse nu.</strong> Även om språkprovet är försenat till höst 2027 tar det tid att bygga upp svenska utöver grundläggande SFI-nivå.</span>
+          <span data-lang="ar"><strong>ابدأ SFI أو التحضير اللغوي الآن.</strong> حتى لو تأجل اختبار اللغة إلى خريف 2027، يستغرق بناء السويدية وقتاً.</span>
+          <span data-lang="uk"><strong>Починайте SFI або мовну підготовку зараз.</strong> Навіть якщо мовний тест перенесено на осінь 2027, розвиток шведської мови займає час.</span>
+        </span>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <span>
+          <span data-lang="en"><strong>Apply as soon as you qualify</strong> — do not wait. Given the 47-month processing time, every month of delay pushes your decision further into the new-rules era. Apply the day you meet the residency and permit requirements.</span>
+          <span data-lang="sv"><strong>Ansök så snart du kvalificerar</strong> — vänta inte. Med 47 månaders handläggningstid skjuter varje månads dröjsmål ditt beslut längre in i den nya regelepoken.</span>
+          <span data-lang="ar"><strong>تقدم بطلبك بمجرد استيفائك للشروط</strong> — لا تنتظر. مع وقت معالجة 47 شهراً، كل شهر تأخير يدفع قرارك أبعد في عهد القواعد الجديدة.</span>
+          <span data-lang="uk"><strong>Подайте заяву, щойно отримаєте право</strong> — не чекайте. За 47-місячного часу обробки кожен місяць затримки переміщує ваше рішення далі в еру нових правил.</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="citizenship.html" class="bnav-btn active">
+    <span class="bnav-icon">🇸🇪</span>
+    <span data-lang="en">Citizenship</span><span data-lang="sv">Medborgarskap</span><span data-lang="ar">الجنسية</span><span data-lang="uk">Громадянство</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script>
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  checkCitReady();
+}
+
+function checkCitReady() {
+  const ready = document.getElementById('arrival-date').value && answers.cq1 && answers.cq2;
+  document.getElementById('cit-btn').disabled = !ready;
+}
+document.getElementById('arrival-date').addEventListener('change', checkCitReady);
+
+// ── COUNTDOWNS ──
+function updateCountdowns() {
+  const now = new Date();
+
+  // June 6 2026 law
+  const law = new Date('2026-06-06T00:00:00');
+  const lawMs = law - now;
+  if (lawMs > 0) {
+    const days = Math.floor(lawMs / 86400000);
+    const hours = Math.floor((lawMs % 86400000) / 3600000);
+    const mins = Math.floor((lawMs % 3600000) / 60000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  } else {
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent = 'LAW IN FORCE';
+  }
+
+  // August 2026 civics test (approximate: Aug 1 2026)
+  const test = new Date('2026-08-01T00:00:00');
+  const testMs = test - now;
+  if (testMs > 0) {
+    document.getElementById('cd-test-days').textContent = Math.floor(testMs / 86400000);
+  } else {
+    document.getElementById('cd-test-days').textContent = 'PASSED';
+  }
+}
+updateCountdowns();
+setInterval(updateCountdowns, 60000);
+
+// ── CITIZENSHIP CALCULATOR ──
+function calculateCitizenship() {
+  const arrivalVal = document.getElementById('arrival-date').value;
+  if (!arrivalVal) return;
+
+  const arrival = new Date(arrivalVal + '-01');
+  const situation = answers.cq1;
+  const hasPR = answers.cq2;
+  const today = new Date();
+  const lawDate = new Date('2026-06-06');
+
+  // Years needed by situation
+  const yearsMap = { main: 8, married: 3, refugee: 5, nordic: 2 };
+  const yearsOldMap = { main: 5, married: 3, refugee: 4, nordic: 2 };
+  const yearsNeeded = yearsMap[situation] || 8;
+  const yearsNeededOld = yearsOldMap[situation] || 5;
+
+  // Calculate eligibility dates
+  const eligibleOld = new Date(arrival);
+  eligibleOld.setFullYear(eligibleOld.getFullYear() + yearsNeededOld);
+
+  const eligibleNew = new Date(arrival);
+  eligibleNew.setFullYear(eligibleNew.getFullYear() + yearsNeeded);
+
+  // Years lived so far
+  const msLived = today - arrival;
+  const yearsLived = msLived / (1000 * 60 * 60 * 24 * 365.25);
+
+  // Processing time: 47 months
+  const processingMs = 47 * 30.44 * 24 * 60 * 60 * 1000;
+
+  const fmt = d => d.toLocaleDateString('en-SE', { month: 'long', year: 'numeric' });
+  const fmtFull = d => d.toLocaleDateString('en-SE', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  let html = '';
+
+  // PR warning if needed
+  if (hasPR === 'no') {
+    html += `<div class="outdated-warning" style="margin-bottom:16px">
+      <span class="warn-icon">⚠</span>
+      <p><strong>You need a permanent residence permit before applying for citizenship.</strong> You cannot apply without it. Check your current permit type on Migrationsverket's Mina Sidor and apply for permanent residence when you qualify. This is a separate process.</p>
+    </div>`;
+  }
+  if (hasPR === 'unsure') {
+    html += `<div class="unknown-box" style="margin-bottom:16px">
+      <div class="unknown-label">Check your permit type first</div>
+      <p>Log in to Mina Sidor at migrationsverket.se to see your exact permit type. Look for "permanent uppehållstillstånd" (PUT). If you have a temporary permit you must apply for permanent residence before citizenship.</p>
+    </div>`;
+  }
+
+  // Main result
+  const alreadyEligibleOld = today >= eligibleOld;
+  const alreadyEligibleNew = today >= eligibleNew;
+
+  if (alreadyEligibleOld && !alreadyEligibleNew) {
+    // Eligible under old rules, not yet under new
+    const applyNow = new Date(today);
+    const decisionEst = new Date(today.getTime() + processingMs);
+    const underNewRules = decisionEst > lawDate;
+
+    html += `<div class="result-band" style="background:#fff3e0; border:2px solid var(--warn)">
+      <div class="result-label" style="color:var(--warn)">⚡ You qualify now under current rules — but time is critical</div>
+      <h3>You have lived in Sweden for <strong>${yearsLived.toFixed(1)} years</strong></h3>
+      <p style="font-size:14px; color:var(--ink2); line-height:1.7; margin-top:8px">
+        You meet the <strong>${yearsNeededOld}-year residency requirement under current rules</strong>.
+        However, if you apply today and it takes the average 47 months to process,
+        your decision would come around <strong>${fmt(decisionEst)}</strong> —
+        ${underNewRules ? '<strong style="color:var(--red)">after the 6 June 2026 new-rules deadline.</strong> You would be assessed under the new stricter requirements.' : '<strong style="color:var(--green)">before the 6 June 2026 deadline</strong> if processing times hold.'}
+      </p>
+    </div>`;
+  } else if (alreadyEligibleNew) {
+    html += `<div class="result-band" style="background:var(--green-light); border:2px solid var(--green)">
+      <div class="result-label" style="color:var(--green)">✓ You already meet the new 8-year residency requirement</div>
+      <h3>You have lived in Sweden for <strong>${yearsLived.toFixed(1)} years</strong></h3>
+      <p style="font-size:14px; color:var(--ink2); line-height:1.7; margin-top:8px">
+        You meet the new ${yearsNeeded}-year residency requirement. ${hasPR === 'yes' ? 'You have a permanent residence permit.' : ''}
+        Apply as soon as you have confirmed all requirements are met (income, conduct, permit).
+        With 47-month average processing, apply now for best odds.
+      </p>
+    </div>`;
+  } else {
+    // Not yet eligible
+    const monthsToOld = Math.max(0, Math.ceil((eligibleOld - today) / (30.44 * 24 * 60 * 60 * 1000)));
+    const monthsToNew = Math.max(0, Math.ceil((eligibleNew - today) / (30.44 * 24 * 60 * 60 * 1000)));
+
+    html += `<div class="result-band" style="background:var(--blue-light); border:2px solid var(--swedish-blue)">
+      <div class="result-label" style="color:var(--swedish-blue)">Your citizenship timeline</div>
+      <h3>You have lived in Sweden for <strong>${yearsLived.toFixed(1)} years</strong></h3>
+      <p style="font-size:14px; color:var(--ink2); line-height:1.7; margin-top:8px">
+        Under <strong>current rules</strong> (${yearsNeededOld} years): eligible <strong>${fmtFull(eligibleOld)}</strong> — ${monthsToOld} months from now.<br>
+        Under <strong>new rules from June 2026</strong> (${yearsNeeded} years): eligible <strong>${fmtFull(eligibleNew)}</strong> — ${monthsToNew} months from now.
+      </p>
+    </div>`;
+
+    // Show which rules will apply
+    if (eligibleOld <= lawDate) {
+      const applyOn = eligibleOld;
+      const decEst = new Date(applyOn.getTime() + processingMs);
+      html += `<div class="highlight-note" style="margin-top:12px">
+        You become eligible under current rules on ${fmtFull(eligibleOld)} — before the law changes.
+        If you apply immediately on that date, your decision would come around ${fmt(decEst)}.
+        ${decEst > lawDate ? 'However, given the 47-month processing time, your decision would still likely fall after June 2026 and be assessed under new rules.' : 'This may still fall before the June 2026 cutoff — but processing times vary.'}
+      </div>`;
+    }
+  }
+
+  html += `<div class="unknown-box" style="margin-top:12px">
+    <div class="unknown-label">This calculator uses official rules — it is not legal advice</div>
+    <p>Eligibility depends on your specific permit history, absences from Sweden, conduct record, and identity verification. Klartväg cannot determine whether you individually qualify. Always verify at migrationsverket.se or with an immigration lawyer before applying. Processing time of 47 months is the published average — individual cases vary.</p>
+  </div>`;
+
+  const resultEl = document.getElementById('cit-result');
+  resultEl.innerHTML = html;
+  resultEl.style.display = 'block';
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
