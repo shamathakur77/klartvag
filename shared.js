@@ -153,3 +153,26 @@ function getBottomNavHTML(active) {
     </a>`
   ).join('')}</nav>`;
 }
+
+
+// ── FOOTER SETUP ──
+// Sets WhatsApp share URL dynamically with current page
+function setupFooter() {
+  const url = encodeURIComponent(window.location.href);
+  const langEl = document.body.className;
+  const lang = langEl.replace('lang-', '');
+  
+  const msgs = {
+    en: "Navigating Sweden's migration system? This free tool covers work permits, asylum, citizenship (new 2026 rules) and more — official sources only.",
+    sv: "Navigerar du i Sveriges migrationssystem? Det här gratis verktyget täcker arbetstillstånd, asyl, medborgarskap (nya regler 2026) och mer.",
+    ar: "هل تتنقل في نظام الهجرة السويدي؟ هذه الأداة المجانية تغطي تصاريح العمل واللجوء والجنسية (قواعد 2026 الجديدة).",
+    uk: "Орієнтуєтесь у шведській міграційній системі? Цей безкоштовний інструмент охоплює дозволи на роботу, притулок, громадянство (нові правила 2026)."
+  };
+  
+  const msg = msgs[lang] || msgs.en;
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(msg + ' ')}${url}`;
+  const waBtn = document.getElementById('kv-wa-share');
+  if (waBtn) waBtn.href = waUrl;
+}
+
+document.addEventListener('DOMContentLoaded', setupFooter);
