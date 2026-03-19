@@ -36,7 +36,7 @@
 <div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Employer / HR</span><span data-lang="sv">Arbetsgivare / HR</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span></span></div>
 
 <div class="breadcrumb">
-      <span class="bc-item" onclick="window.location.href='home.html'">
+      <span class="bc-item" onclick="window.location.href='index.html'">
         <span data-lang="en">Home</span><span data-lang="sv">Hem</span>
       </span>
       <span class="bc-sep">›</span>
@@ -668,21 +668,195 @@
 </nav>
 
 <script src="shared.js"></script>
-<script src="tools.js"></script>
 <script>
 
-// Page-specific JS — chips, steps, employer tools, asylum tools
-const answers = {};
-function selectChip(el, q, val) {
-  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  answers[q] = val;
-  if (typeof onChipSelect === 'function') onChipSelect(q, val);
-  if (typeof checkReady === 'function') checkReady();
-  if (typeof checkEmpReady === 'function') checkEmpReady();
-}
+window.answers = {};
+
 function toggleStep(id) {
   document.getElementById(id)?.classList.toggle('open');
+}
+
+// ── TOOL SWITCHER ──
+function showEmployerTool(tool, el) {
+  ['cat-checker','expiry-tracker','doc-checklist'].forEach(t => {
+    const el = document.getElementById('tool-' + t);
+    if (el) el.style.display = t === tool ? '' : 'none';
+  });
+  document.querySelectorAll('.situation-block .option-chips .chip').forEach(c => c.classList.remove('selected'));
+  if (el) el.classList.add('selected');
+}
+
+// ── CATEGORY CHECKER ──
+function checkEmpReady() {
+  const ready = answers.eq1 && answers.eq2 && answers.eq3;
+  const btn = document.getElementById('emp-find-btn');
+  if (btn) btn.disabled = !ready;
+}
+
+function showCategoryResult() {
+  const { eq1, eq2, eq3 } = answers;
+  const resultEl = document.getElementById('cat-result');
+  const innerEl = document.getElementById('cat-result-inner');
+  if (!resultEl || !innerEl) return;
+
+  let category, headline, detail, warning = '', note = '';
+
+  if (eq2 === 'risk') {
+    category = 'Category D';
+    headline = 'Your industry is in Category D — enhanced scrutiny applies';
+    detail = 'Category D industries (cleaning, construction, hospitality, personal assistance, agriculture, retail, and others on the Migrationsverket high-risk list) face mandatory union consultation, closer inspection of employment terms, and longer processing times. The salary must still meet the threshold and all standard documents apply, plus additional financial documentation.';
+    warning = 'Category D processing times are not guaranteed and may exceed 120 days. Applications are more likely to be rejected if employment terms do not clearly meet collective agreement (kollektivavtal) standards. Documentation of financial capacity is required.';
+  } else if (eq2 === 'unsure') {
+    category = 'Category unknown — verify SNI first';
+    headline = 'Sector category cannot be determined without your SNI code';
+    detail = 'Your SNI (Standard Industrial Classification) code determines which processing category applies. Find it on your Skatteverket registration certificate or by looking up your company at Bolagsverket.se.';
+    note = 'Once you have your SNI code, return here and select the matching industry option. Or call Migrationsverket on 0771-235 235 to confirm your category directly.';
+  } else {
+    // safe sector
+    if (eq3 === 'qualified' && eq1 === 'yes') {
+      category = 'Category A — Fast Track';
+      headline = 'Category A — 30-day processing target';
+      detail = 'Your sector is low-risk and your employer is registered 12+ months. Roles requiring higher education (SSYK codes starting 1, 2, or 3) qualify for the 30-day fast track. The employer must initiate the application in Migrationsverket\'s e-service first. The 30-day clock starts only when BOTH the employer and applicant parts are fully submitted.';
+    } else if (eq3 === 'qualified' && eq1 === 'no') {
+      category = 'Category A (conditional)';
+      headline = 'Likely Category A — employer registration may affect fast-track eligibility';
+      detail = 'The role type qualifies for Category A, but your employer being registered under 12 months means Migrationsverket may not grant fast-track status. Standard processing (60–90+ days) may apply instead.';
+      warning = 'Employers under 12 months must provide additional financial documentation: opening balance sheet or profit-and-loss statement, and proof of funds to cover 3 months\' salary.';
+    } else if (eq3 === 'special') {
+      category = 'Category B — Researcher / Blue Card / ICT / Artist / Athlete';
+      headline = 'Separate application track — not standard work permit';
+      detail = 'EU Blue Card, ICT transfers, researchers, PhD students, artists, and athletes are processed under separate regulatory tracks. The host organisation or employer must be registered with Migrationsverket for the relevant scheme. Processing times vary by track.';
+      note = 'Ensure your organisation is registered as an approved host before initiating the application. For researchers: the university or research institution acts as host. For ICT transfers: your parent company must be registered outside the EU.';
+    } else {
+      category = 'Category C — Standard Work Permit';
+      headline = 'Standard processing — 60–90 days typical';
+      detail = 'Skilled trade and technical roles not requiring higher education, in a safe industry with a registered employer, fall under Category C. The salary must meet the threshold (currently SEK 29,680/month, rising to ~SEK 33,390 from June 2026). Standard documents apply.';
+      if (eq1 === 'no') warning = 'Employer registered under 12 months requires additional financial documentation and may face longer processing.';
+    }
+  }
+
+  resultEl.style.display = 'block';
+  innerEl.innerHTML = `
+    <div class="your-path-header" style="margin-bottom:16px">
+      <h2>${category}</h2>
+      <div class="path-meta">${headline}</div>
+    </div>
+    <div style="padding:0 0 16px">
+      <p style="font-family:'IBM Plex Sans',sans-serif;font-size:15px;line-height:1.6;color:#2a2a2a;margin-bottom:12px">${detail}</p>
+      ${warning ? `<div class="outdated-warning"><span class="warn-icon">⚠</span><p>${warning}</p></div>` : ''}
+      ${note ? `<div class="unknown-box"><div class="unknown-label">Note</div><p>${note}</p></div>` : ''}
+      <div class="official-source" style="margin-top:16px">
+        <div class="official-source-label">Official Source — Migrationsverket</div>
+        <a href="https://www.migrationsverket.se/en/employers/applying-for-a-work-permit.html" target="_blank">migrationsverket.se → Employers → Applying for a work permit</a>
+        <div class="last-checked">Last checked: March 2026</div>
+      </div>
+      <div class="highlight-note" style="margin-top:16px">Next step: expand the steps below to see what documents you need and how to submit.</div>
+    </div>
+  `;
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── PERMIT EXPIRY TRACKER ──
+let trackerCount = 1;
+function addTrackerRow() {
+  const container = document.getElementById('tracker-entries');
+  const idx = trackerCount++;
+  const row = document.createElement('div');
+  row.style = 'display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:end';
+  row.id = 'tracker-' + idx;
+  row.innerHTML = `
+    <div>
+      <div class="question-label" style="font-size:11px;margin-bottom:4px"><span data-lang="en">Employee name</span></div>
+      <input type="text" placeholder="e.g. Priya Sharma" style="width:100%;padding:8px 10px;border:1px solid var(--border2);background:white;font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--ink)">
+    </div>
+    <div>
+      <div class="question-label" style="font-size:11px;margin-bottom:4px"><span data-lang="en">Permit type</span></div>
+      <select style="width:100%;padding:8px 10px;border:1px solid var(--border2);background:white;font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--ink)">
+        <option>Category A (highly qualified)</option>
+        <option>Category B (Blue Card / ICT / researcher)</option>
+        <option>Category C (skilled, non-high-risk industry)</option>
+        <option>Category D (high-scrutiny industry)</option>
+      </select>
+    </div>
+    <div>
+      <div class="question-label" style="font-size:11px;margin-bottom:4px"><span data-lang="en">Permit expiry date</span></div>
+      <input type="date" style="width:100%;padding:8px 10px;border:1px solid var(--border2);background:white;font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--ink)">
+    </div>
+    <div style="padding-bottom:2px">
+      <button onclick="calculateExpiry(this)" style="background:var(--swedish-blue);color:white;border:none;padding:9px 14px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:12px;white-space:nowrap">Check →</button>
+    </div>
+  `;
+  container.appendChild(row);
+}
+
+function calculateExpiry(btn) {
+  const row = btn.closest('div').parentElement;
+  const name = row.querySelector('input[type="text"]').value.trim() || 'Employee';
+  const permitType = row.querySelector('select').value;
+  const expiry = row.querySelector('input[type="date"]').value;
+
+  if (!expiry) { alert('Please enter the permit expiry date.'); return; }
+
+  const expiryDate = new Date(expiry);
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const daysUntil = Math.round((expiryDate - today) / (1000 * 60 * 60 * 24));
+
+  // Processing time targets by category (official Migrationsverket targets)
+  const processingDays = {
+    'Category A (highly qualified)': 30,
+    'Category B (Blue Card / ICT / researcher)': 90,
+    'Category C (skilled, non-high-risk industry)': 90,
+    'Category D (high-scrutiny industry)': 120,
+  };
+  const leadDays = processingDays[permitType] || 90;
+  const applyBy = new Date(expiryDate);
+  applyBy.setDate(applyBy.getDate() - leadDays);
+  const daysToApply = Math.round((applyBy - today) / (1000 * 60 * 60 * 24));
+
+  let status, statusColor, advice;
+  if (daysUntil < 0) {
+    status = '🔴 EXPIRED';
+    statusColor = '#7a1a1a';
+    advice = 'Permit has expired. The employee may no longer have the right to work. Contact Migrationsverket immediately on 0771-235 235.';
+  } else if (daysToApply <= 0) {
+    status = '🔴 APPLY NOW';
+    statusColor = '#7a1a1a';
+    advice = `Renewal application should already have been submitted based on the ${leadDays}-day processing target for ${permitType}. Submit immediately. The employee retains the right to work if the renewal application is submitted before expiry.`;
+  } else if (daysToApply <= 30) {
+    status = '🟡 APPLY SOON';
+    statusColor = '#8a6a20';
+    advice = `Apply within ${daysToApply} days to stay within the ${leadDays}-day processing window for ${permitType}. If applied before expiry, the employee retains right to work during processing.`;
+  } else {
+    status = '🟢 OK';
+    statusColor = '#1a5c3a';
+    advice = `Apply by ${applyBy.toLocaleDateString('en-SE', {year:'numeric',month:'long',day:'numeric'})} (${daysToApply} days from now) to allow ${leadDays} days processing time for ${permitType}.`;
+  }
+
+  const resultsEl = document.getElementById('expiry-results');
+  const existing = document.getElementById('expiry-result-' + row.id);
+  if (existing) existing.remove();
+
+  const resultDiv = document.createElement('div');
+  resultDiv.id = 'expiry-result-' + row.id;
+  resultDiv.style = 'border:1px solid var(--border2);padding:12px 16px;margin-bottom:8px;font-family:"IBM Plex Sans",sans-serif;font-size:13px';
+  resultDiv.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <strong>${name}</strong>
+      <span style="font-weight:600;color:${statusColor}">${status}</span>
+    </div>
+    <div style="color:#555;margin-bottom:4px">${permitType} · Expires ${expiryDate.toLocaleDateString('en-SE', {year:'numeric',month:'long',day:'numeric'})} (${daysUntil} days)</div>
+    <div style="color:#333">${advice}</div>
+  `;
+  resultsEl.appendChild(resultDiv);
+}
+
+// ── DOC LIST SWITCHER ──
+function showDocList(type) {
+  ['standard','new','highrisk'].forEach(t => {
+    const el = document.getElementById('doclist-' + t);
+    if (el) el.style.display = t === type ? '' : 'none';
+  });
 }
 
 </script>

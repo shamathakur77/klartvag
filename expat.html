@@ -36,7 +36,7 @@
 <div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Expat / Skilled Worker</span><span data-lang="sv">Expat / Kvalificerad arbetstagare</span></span></div>
 
 <div class="breadcrumb">
-      <span class="bc-item" onclick="window.location.href='home.html'">
+      <span class="bc-item" onclick="window.location.href='index.html'">
         <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
       </span>
       <span class="bc-sep">›</span>
@@ -665,21 +665,94 @@
 </nav>
 
 <script src="shared.js"></script>
-<script src="tools.js"></script>
 <script>
 
-// Page-specific JS — chips, steps, employer tools, asylum tools
-const answers = {};
+window.answers = {};
+
 function selectChip(el, q, val) {
   el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   answers[q] = val;
-  if (typeof onChipSelect === 'function') onChipSelect(q, val);
-  if (typeof checkReady === 'function') checkReady();
-  if (typeof checkEmpReady === 'function') checkEmpReady();
+  checkReady();
 }
+
 function toggleStep(id) {
   document.getElementById(id)?.classList.toggle('open');
+}
+
+function checkReady() {
+  const ready = answers.q1 && answers.q2 && answers.q3;
+  const btn = document.getElementById('find-btn');
+  if (btn) btn.disabled = !ready;
+}
+
+function showExpatPath() {
+  const { q1, q2, q3 } = answers;
+
+  // Build path config based on selections
+  const paths = {
+    // Outside Sweden
+    'outside-catA-yes':     { title: 'Category A Work Permit (Fast Track — 30 days)', meta: '4 steps · Migrationsverket + Skatteverket + Försäkringskassan', steps: ['s1','s2','s3','s4'] },
+    'outside-catA-no':      { title: 'Category A Work Permit — Employer verification required', meta: '4 steps · Note: employer registered <12 months may affect category', steps: ['s1','s2','s3','s4'], warning: 'Your employer may not qualify for Category A fast track. Migrationsverket will assess during processing. Standard processing (not 30-day) may apply.' },
+    'outside-researcher-yes': { title: 'Researcher / PhD Permit (ICT Directive)', meta: '4 steps · Separate researcher track', steps: ['s1','s2','s3','s4'], note: 'Researchers and PhD students apply under a separate track. Your university or research institution typically acts as the host organisation — not a standard employer.' },
+    'outside-researcher-no':  { title: 'Researcher / PhD Permit', meta: 'Host institution must be registered in Sweden', steps: ['s1','s2','s3','s4'], warning: 'Your host institution must be registered in Sweden. Contact them directly before applying.' },
+    'outside-skilled-yes':  { title: 'Standard Work Permit (Category B/C)', meta: '4 steps · Longer processing time than Category A', steps: ['s1','s2','s3','s4'], note: 'Skilled trade and technical roles that do not require higher education fall outside Category A. Processing time is typically 60–90 days. Check if your occupation is on the shortage list for any expedited handling.' },
+    'outside-skilled-no':   { title: 'Standard Work Permit — Employer verification required', meta: 'Processing time: 60–90 days typical', steps: ['s1','s2','s3','s4'], warning: 'Employer registered under 12 months adds scrutiny. Migrationsverket may request additional documentation.' },
+
+    // Already in Sweden
+    'inside-catA-yes':      { title: 'Change of Status — Category A (In-country)', meta: 'You are already in Sweden. Same permit type, applied from within.', steps: ['s1','s2','s3','s4'], note: 'Applying from inside Sweden is possible if your current status allows it (e.g. on a visitor visa or prior permit). Check with Migrationsverket that your current status permits an in-country application.' },
+    'inside-catA-no':       { title: 'Change of Status — Category A', meta: 'Employer eligibility may affect processing', steps: ['s1','s2','s3','s4'], warning: 'Employer registered under 12 months may affect eligibility for fast-track processing from inside Sweden.' },
+    'inside-researcher-yes':{ title: 'Change of Status — Researcher Track', meta: 'In-country researcher application', steps: ['s1','s2','s3','s4'], note: 'Researcher track from inside Sweden. Confirm with your host institution that they are registered with Migrationsverket as a host organisation.' },
+    'inside-researcher-no': { title: 'Change of Status — Researcher Track', meta: 'Host institution registration required', steps: ['s1','s2','s3','s4'], warning: 'Host institution must be registered in Sweden. Verify before proceeding.' },
+    'inside-skilled-yes':   { title: 'Change of Status — Standard Work Permit', meta: 'In-country application, 60–90 days', steps: ['s1','s2','s3','s4'], note: 'Skilled / technical role applications from inside Sweden follow the same standard track. Ensure your current status gives you the right to remain while the application is processed.' },
+    'inside-skilled-no':    { title: 'Change of Status — Standard Work Permit', meta: 'In-country, employer scrutiny applies', steps: ['s1','s2','s3','s4'], warning: 'Employer registered under 12 months will face extra scrutiny. Consider consulting Migrationsverket directly.' },
+
+    // Permit extension
+    'extension-catA-yes':   { title: 'Permit Extension — Category A', meta: 'Renewing your existing work permit', steps: ['s1','s2','s3','s4'], note: 'Extensions follow similar requirements to the original application. Apply before your current permit expires — you may continue working during processing if you apply on time.' },
+    'extension-catA-no':    { title: 'Permit Extension — Category A', meta: 'Employer change may apply', steps: ['s1','s2','s3','s4'], warning: 'If your employer has changed or is newly registered (<12 months), Migrationsverket will reassess eligibility for the fast-track category.' },
+    'extension-researcher-yes':{ title: 'Permit Extension — Researcher Track', meta: 'Renewing researcher/PhD permit', steps: ['s1','s2','s3','s4'], note: 'Extensions for researchers are processed via the same host-institution route. Confirm your institution is still registered.' },
+    'extension-researcher-no':{ title: 'Permit Extension — Researcher Track', meta: 'Host institution must remain registered', steps: ['s1','s2','s3','s4'], warning: 'Confirm your host institution is still registered in Sweden before applying for extension.' },
+    'extension-skilled-yes':{ title: 'Permit Extension — Standard Work Permit', meta: 'Renewing skilled/technical permit', steps: ['s1','s2','s3','s4'], note: 'Apply before expiry. You retain the right to work while your extension is being processed if you apply on time.' },
+    'extension-skilled-no': { title: 'Permit Extension — Standard Work Permit', meta: 'Employer change applies extra scrutiny', steps: ['s1','s2','s3','s4'], warning: 'Change of employer or newly registered employer will be assessed. Consider contacting Migrationsverket for guidance before applying.' },
+  };
+
+  const key = `${q1}-${q2}-${q3}`;
+  const path = paths[key];
+
+  const resultEl = document.getElementById('expat-path');
+
+  if (!path) {
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `<div class="unknown-box" style="margin:24px 0"><div class="unknown-label">Path not found</div><p>We couldn't match a specific path for your combination. Please check directly at <a href="https://www.migrationsverket.se" target="_blank">migrationsverket.se</a> or call 0771-235 235.</p></div>`;
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // Update header title with selected path
+  const titleEl = resultEl.querySelector('.your-path-header h2 span[data-lang="en"]');
+  const metaEl = resultEl.querySelector('.path-meta span[data-lang="en"]');
+  if (titleEl) titleEl.textContent = 'Your path: ' + path.title;
+  if (metaEl) metaEl.textContent = path.meta;
+
+  // Show/hide warning or note banners
+  const existingBanner = resultEl.querySelector('.path-dynamic-banner');
+  if (existingBanner) existingBanner.remove();
+
+  if (path.warning || path.note) {
+    const banner = document.createElement('div');
+    banner.className = 'path-dynamic-banner';
+    banner.style.margin = '0 0 16px';
+    if (path.warning) {
+      banner.innerHTML = `<div class="outdated-warning"><span class="warn-icon">⚠</span><p>${path.warning}</p></div>`;
+    } else {
+      banner.innerHTML = `<div class="unknown-box"><div class="unknown-label">Note</div><p>${path.note}</p></div>`;
+    }
+    const stepsContainer = resultEl.querySelector('.steps-container');
+    if (stepsContainer) resultEl.insertBefore(banner, stepsContainer);
+  }
+
+  resultEl.style.display = 'block';
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 </script>

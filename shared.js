@@ -35,12 +35,14 @@ function toggleStep(id) {
 }
 
 // ── CHIPS ──
-const answers = {};
+// answers object is declared per-page to avoid conflicts with shared scope
 function selectChip(el, q, val) {
   el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
-  answers[q] = val;
+  if (typeof window.answers !== 'undefined') window.answers[q] = val;
   if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
 }
 
 // ── SCB SALARY THRESHOLD ──

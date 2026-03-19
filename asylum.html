@@ -30,7 +30,7 @@
 <div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Asylum Seeker / Refugee</span><span data-lang="sv">Asylsökande / Flykting</span><span data-lang="ar">طالب لجوء</span><span data-lang="uk">Шукач притулку</span></span></div>
 
 <div class="breadcrumb">
-      <span class="bc-item" onclick="window.location.href='home.html'">
+      <span class="bc-item" onclick="window.location.href='index.html'">
         <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
       </span>
       <span class="bc-sep">›</span>
@@ -778,21 +778,48 @@
 </nav>
 
 <script src="shared.js"></script>
-<script src="tools.js"></script>
 <script>
 
-// Page-specific JS — chips, steps, employer tools, asylum tools
-const answers = {};
-function selectChip(el, q, val) {
-  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  answers[q] = val;
-  if (typeof onChipSelect === 'function') onChipSelect(q, val);
-  if (typeof checkReady === 'function') checkReady();
-  if (typeof checkEmpReady === 'function') checkEmpReady();
-}
+window.answers = {};
+
 function toggleStep(id) {
   document.getElementById(id)?.classList.toggle('open');
+}
+
+function calculateAppealDeadline() {
+  const input = document.getElementById('decision-date');
+  const resultEl = document.getElementById('appeal-result');
+  if (!input || !resultEl) return;
+
+  const val = input.value;
+  if (!val) { alert('Please enter the date you received the decision.'); return; }
+
+  const received = new Date(val);
+  const deadline = new Date(received);
+  deadline.setDate(deadline.getDate() + 21); // 3 weeks = 21 days (official rule)
+
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const daysLeft = Math.round((deadline - today) / (1000 * 60 * 60 * 24));
+
+  let statusHtml;
+  if (daysLeft < 0) {
+    statusHtml = `<div class="outdated-warning"><span class="warn-icon">⚠</span><p><strong>Appeal deadline has passed</strong> (${Math.abs(daysLeft)} days ago). You generally cannot appeal after 3 weeks from receipt of the decision. Contact a legal aid organisation immediately — Röda Korset (redcross.se), UNHCR Sweden (unhcr.org/se), or ask Migrationsverket whether any exceptions apply in your case.</p></div>`;
+  } else if (daysLeft === 0) {
+    statusHtml = `<div class="outdated-warning"><span class="warn-icon">⚠</span><p><strong>Today is your appeal deadline.</strong> You must submit your appeal letter to Migrationsverket today. Send it by registered post or deliver it in person to a Migrationsverket office.</p></div>`;
+  } else if (daysLeft <= 7) {
+    statusHtml = `<div class="outdated-warning"><span class="warn-icon">⚠</span><p><strong>${daysLeft} days left to appeal</strong> — deadline is ${deadline.toLocaleDateString('en-SE', {weekday:'long', year:'numeric', month:'long', day:'numeric'})}. Act immediately. See appeal steps below.</p></div>`;
+  } else {
+    statusHtml = `<div class="unknown-box"><div class="unknown-label">Appeal deadline</div><p>You have <strong>${daysLeft} days</strong> to appeal. Deadline: <strong>${deadline.toLocaleDateString('en-SE', {weekday:'long', year:'numeric', month:'long', day:'numeric'})}</strong>. Do not wait until the last days — allow time to write and send your letter. See the appeal steps below.</p></div>`;
+  }
+
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = statusHtml + `
+    <div class="plain-language" style="margin-top:12px">
+      <div class="plain-language-label">Important — how to count 3 weeks</div>
+      <p>The 3-week period starts from the day you <em>received</em> the decision, not the date printed on it. If you received it by post, Migrationsverket assumes delivery 2 weeks after the date on the letter unless you can prove otherwise. If unsure of your exact receipt date, use the earliest possible date to be safe.</p>
+      <div class="plain-language-disclaimer">Source: Swedish Administrative Procedure Act (förvaltningslagen). Klartväg is not legal advice — verify with a legal aid organisation.</div>
+    </div>`;
 }
 
 </script>

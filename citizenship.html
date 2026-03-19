@@ -957,7 +957,7 @@
 
 <script src="shared.js"></script>
 <script>
-const answers = {};
+window.answers = {};
 function selectChip(el, q, val) {
   el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
