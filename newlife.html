@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starting Life in Sweden — Klartväg</title>
+<meta name="description" content="Permit approved. The exact sequence: personnummer, BankID, Försäkringskassan, healthcare — in the right order.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Starting Life in Sweden</span><span data-lang="sv">Börja livet i Sverige</span><span data-lang="ar">بدء الحياة في السويد</span><span data-lang="uk">Початок життя у Швеції</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">
+        <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+      </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">
+        <span data-lang="en">Starting life in Sweden</span><span data-lang="sv">Börja livet i Sverige</span><span data-lang="ar">بدء الحياة في السويد</span><span data-lang="uk">Початок життя у Швеції</span>
+      </span>
+    </div>
+
+    <div class="situation-block">
+      <h2>
+        <span data-lang="en">Permit approved. Here is the exact sequence.</span>
+        <span data-lang="sv">Tillstånd godkänt. Här är den exakta ordningsföljden.</span>
+        <span data-lang="ar">تمت الموافقة على التصريح. إليك التسلسل الدقيق.</span>
+        <span data-lang="uk">Дозвіл схвалено. Ось точна послідовність.</span>
+      </h2>
+      <div class="sv-label">
+        <span data-lang="en">Order matters. Each step unlocks the next. Do them out of sequence and you wait longer.</span>
+        <span data-lang="sv">Ordningen spelar roll. Varje steg låser upp nästa. Gör dem i fel ordning och du väntar längre.</span>
+        <span data-lang="ar">الترتيب مهم. كل خطوة تفتح التالية. افعلها خارج التسلسل وستنتظر أطول.</span>
+        <span data-lang="uk">Порядок має значення. Кожен крок відкриває наступний.</span>
+      </div>
+    </div>
+
+    <div class="steps-container">
+
+      <div class="step-card" id="nl1">
+        <div class="step-header" onclick="toggleStep('nl1')">
+          <div class="step-num" style="background:#1a5c3a">01</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Skatteverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Register your move → get personnummer</span>
+              <span data-lang="sv">Folkbokför dig → få personnummer</span>
+              <span data-lang="ar">سجّل انتقالك ← احصل على رقم شخصي</span>
+              <span data-lang="uk">Зареєструй переїзд → отримай personnummer</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">Step 1 first</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Skatteverket</div>
+            <a href="https://www.skatteverket.se/privat/folkbokforing/nyanlandisverige.4.7be5268414bea064694f30.html" target="_blank">skatteverket.se → Folkbokföring → Nyanlända i Sverige</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">Visit a Skatteverket office in person with: your passport, your residence permit card (the physical card from Migrationsverket), and proof of your Swedish address. You cannot do this online. You must go in person.</span>
+              <span data-lang="sv">Besök ett Skatteverket-kontor personligen med: ditt pass, ditt uppehållstillståndskort och bevis på din svenska adress. Du kan inte göra detta online.</span>
+              <span data-lang="ar">قم بزيارة مكتب Skatteverket شخصياً مع: جواز سفرك، بطاقة إقامتك، وإثبات عنوانك السويدي. لا يمكنك فعل هذا عبر الإنترنت.</span>
+              <span data-lang="uk">Відвідайте офіс Skatteverket особисто з: паспортом, карткою дозволу на проживання та підтвердженням шведської адреси. Онлайн це зробити неможливо.</span>
+            </p>
+            <div class="plain-language-disclaimer">Simplified. Verify current requirements at the official Skatteverket link above.</div>
+          </div>
+          <div class="unknown-box">
+            <div class="unknown-label">Processing time — not estimated here</div>
+            <p>
+              <span data-lang="en">Klartväg does not provide personnummer processing time estimates. These vary by office and volume. Check skatteverket.se directly or call 0771-567 567.</span>
+              <span data-lang="sv">Klartväg anger inte handläggningstider för personnummer. Kontrollera hos Skatteverket direkt.</span>
+              <span data-lang="ar">لا يقدم كلارتفاغ تقديرات لوقت معالجة الرقم الشخصي. تحقق من Skatteverket مباشرة.</span>
+              <span data-lang="uk">Klartväg не надає оцінок часу обробки personnummer. Перевіряйте безпосередньо на Skatteverket.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="nl2">
+        <div class="step-header" onclick="toggleStep('nl2')">
+          <div class="step-num" style="background:#006AA7">02</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Bank of your choice</div>
+            <div class="step-title-main">
+              <span data-lang="en">Open a Swedish bank account → get BankID</span>
+              <span data-lang="sv">Öppna bankkonto → skaffa BankID</span>
+              <span data-lang="ar">افتح حساباً بنكياً → احصل على BankID</span>
+              <span data-lang="uk">Відкрий банківський рахунок → отримай BankID</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">Requires personnummer</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">Most Swedish banks require a personnummer to open an account. Once you have the account, you can apply for BankID — the digital identity used for almost every Swedish online service, government portal, and contract signing.</span>
+              <span data-lang="sv">De flesta svenska banker kräver personnummer för att öppna konto. Med kontot kan du ansöka om BankID — den digitala identiteten som används för nästan alla svenska onlinetjänster.</span>
+              <span data-lang="ar">تتطلب معظم البنوك السويدية رقماً شخصياً لفتح حساب. بمجرد حصولك على الحساب، يمكنك التقدم للحصول على BankID.</span>
+              <span data-lang="uk">Більшість шведських банків вимагають personnummer для відкриття рахунку. Після цього можна отримати BankID.</span>
+            </p>
+            <div class="plain-language-disclaimer">Simplified. Bank policies vary. Contact your chosen bank directly for current requirements.</div>
+          </div>
+          <div class="unknown-box">
+            <div class="unknown-label">Which bank to use — outside scope</div>
+            <p>
+              <span data-lang="en">Klartväg does not recommend specific banks. This is a personal financial decision. Konsumenternas.se provides neutral bank comparison information.</span>
+              <span data-lang="sv">Klartväg rekommenderar inte specifika banker. Konsumenternas.se ger neutral bankinformation.</span>
+              <span data-lang="ar">لا يوصي كلارتفاغ ببنوك محددة. Konsumenternas.se يوفر معلومات مقارنة محايدة.</span>
+              <span data-lang="uk">Klartväg не рекомендує конкретні банки. Konsumenternas.se надає нейтральну порівняльну інформацію.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="nl3">
+        <div class="step-header" onclick="toggleStep('nl3')">
+          <div class="step-num" style="background:#5a3a8a">03</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Försäkringskassan</div>
+            <div class="step-title-main">
+              <span data-lang="en">Register for social insurance benefits</span>
+              <span data-lang="sv">Anmäl dig till Försäkringskassan</span>
+              <span data-lang="ar">التسجيل في التأمين الاجتماعي</span>
+              <span data-lang="uk">Реєстрація у Försäkringskassan</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">Requires personnummer</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Försäkringskassan</div>
+            <a href="https://www.forsakringskassan.se/english/new-in-sweden" target="_blank">forsakringskassan.se/english → New in Sweden</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="handoff-box" style="margin-top:12px">
+            <div class="handoff-arrow">ℹ️</div>
+            <div class="handoff-content">
+              <div class="handoff-label">Does not happen automatically</div>
+              <div class="handoff-text">
+                <span data-lang="en">FK does not know you exist until you register. Getting a personnummer does not automatically enrol you. You must contact FK separately — online via BankID, by phone at 0771-524 524, or in person.</span>
+                <span data-lang="sv">FK vet inte att du finns förrän du registrerar dig. Att få personnummer registrerar dig inte automatiskt. Du måste kontakta FK separat.</span>
+                <span data-lang="ar">لا تعرف FK بوجودك حتى تسجل. الحصول على رقم شخصي لا يسجلك تلقائياً. يجب عليك الاتصال بـ FK بشكل منفصل.</span>
+                <span data-lang="uk">FK не знає про вас до реєстрації. Отримання personnummer не зараховує вас автоматично.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="nl4">
+        <div class="step-header" onclick="toggleStep('nl4')">
+          <div class="step-num" style="background:#8a4a10">04</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">1177 / Region</div>
+            <div class="step-title-main">
+              <span data-lang="en">Register with primary healthcare</span>
+              <span data-lang="sv">Anmäl dig till vårdcentral</span>
+              <span data-lang="ar">التسجيل في الرعاية الصحية الأولية</span>
+              <span data-lang="uk">Реєстрація у системі охорони здоров'я</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot optional"></div>
+            <div class="status-text" style="color:#8a6a20">When ready</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — 1177 Vårdguiden</div>
+            <a href="https://www.1177.se/en/your-health-and-care/find-care/choose-a-primary-care-provider/" target="_blank">1177.se/en → Choose a primary care provider</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">You can choose any public healthcare centre (vårdcentral) in Sweden. You do not have to choose one close to home. Search via 1177.se. Most regions accept registration via BankID online or in person.</span>
+              <span data-lang="sv">Du kan välja vilken vårdcentral som helst i Sverige. Sök via 1177.se. De flesta regioner accepterar registrering via BankID online eller personligen.</span>
+              <span data-lang="ar">يمكنك اختيار أي مركز رعاية صحية عامة في السويد. ابحث عبر 1177.se.</span>
+              <span data-lang="uk">Ви можете обрати будь-який державний медичний центр у Швеції. Пошук через 1177.se.</span>
+            </p>
+            <div class="plain-language-disclaimer">Simplified. Healthcare rules vary by region. Verify at 1177.se for your specific region.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn active">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>

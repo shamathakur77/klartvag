@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Reunification — Klartväg</title>
+<meta name="description" content="Family reunification in Sweden. 400-day wait times, what to do while waiting, official sources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Family Reunification</span><span data-lang="sv">Anhöriginvandring</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">Home</span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">Family Reunification</span>
+    </div>
+    <div class="situation-block">
+      <h2>
+        <span data-lang="en">Family reunification</span>
+        <span data-lang="sv">Anhöriginvandring</span>
+        <span data-lang="ar">لم شمل الأسرة</span>
+        <span data-lang="uk">Возз'єднання сім'ї</span>
+      </h2>
+      <div class="official-source" style="margin-top:16px">
+        <div class="official-source-label">Official Source</div>
+        <a href="https://www.migrationsverket.se/en/refugees-and-asylum-seekers/family-reunification.html" target="_blank">migrationsverket.se → Family reunification</a>
+        <div class="last-checked">Last checked: March 2026</div>
+      </div>
+      <div class="outdated-warning" style="margin-top:12px">
+        <span class="warn-icon">⚠</span>
+        <p>
+          <span data-lang="en">Average processing time for first-time family cases was 400 days in 2024. This figure changes frequently. Check current wait times at migrationsverket.se/en/contact-us/waiting-times.html</span>
+          <span data-lang="sv">Genomsnittlig handläggningstid för nya familjeärenden var 400 dagar 2024. Kontrollera aktuella väntetider på migrationsverket.se.</span>
+          <span data-lang="ar">كان متوسط وقت المعالجة لحالات الأسرة الجديدة 400 يوم في 2024. تحقق من أوقات الانتظار الحالية.</span>
+          <span data-lang="uk">Середній час розгляду першого сімейного звернення становив 400 днів у 2024 році. Перевірте поточний час очікування.</span>
+        </p>
+      </div>
+      <div class="unknown-box" style="margin-top:12px">
+        <div class="unknown-label">Prototype scope note</div>
+        <p>
+          <span data-lang="en">Full family reunification flow — including the maintenance requirement calculator, document checklist by relationship type, and Migrationsverket → Skatteverket handoff — is built identically to the Expat flow. Available in full version.</span>
+          <span data-lang="sv">Fullständigt anhöriginvandringsflöde byggs identiskt med expat-flödet. Tillgängligt i fullständig version.</span>
+        </p>
+      </div>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn active">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>

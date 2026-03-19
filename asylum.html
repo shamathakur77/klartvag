@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asylum Seeker / Refugee — Klartväg</title>
+<meta name="description" content="Full asylum process guide in Swedish, English, Arabic and Ukrainian. Appeal deadline calculator, AT-UND work exemption, and post-approval handoff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Asylum Seeker / Refugee</span><span data-lang="sv">Asylsökande / Flykting</span><span data-lang="ar">طالب لجوء</span><span data-lang="uk">Шукач притулку</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">
+        <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+      </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">
+        <span data-lang="en">Asylum Seeker / Refugee</span>
+        <span data-lang="sv">Asylsökande / Flykting</span>
+        <span data-lang="ar">طالب لجوء / لاجئ</span>
+        <span data-lang="uk">Шукач притулку / Біженець</span>
+      </span>
+    </div>
+
+    <!-- ACTIVE REFORM WARNING — always visible -->
+    <div class="outdated-warning" style="margin-bottom:24px">
+      <span class="warn-icon">⚠</span>
+      <p>
+        <span data-lang="en"><strong>Swedish asylum law changed significantly in 2025.</strong> New rules on accommodation, work permits, track changes, and re-entry bans came into force April 2025. This page reflects rules as of March 2026. Always verify at the official source linked in each step.</span>
+        <span data-lang="sv"><strong>Svensk asylrätt förändrades avsevärt 2025.</strong> Nya regler om boende, arbetstillstånd, spårbyten och återreseförbud trädde i kraft april 2025. Verifiera alltid på den officiella källan.</span>
+        <span data-lang="ar"><strong>تغير قانون اللجوء السويدي بشكل كبير في 2025.</strong> دخلت قواعد جديدة بشأن الإقامة وتصاريح العمل حيز التنفيذ في أبريل 2025. تحقق دائماً من المصدر الرسمي.</span>
+        <span data-lang="uk"><strong>Шведське законодавство про притулок суттєво змінилося у 2025 році.</strong> Нові правила щодо проживання, дозволів на роботу та заборон на в'їзд набрали чинності у квітні 2025 року. Завжди перевіряйте офіційне джерело.</span>
+      </p>
+    </div>
+
+    <!-- STEP SELECTOR -->
+    <div class="situation-block" style="margin-bottom:0">
+      <h2>
+        <span data-lang="en">Where are you in the process?</span>
+        <span data-lang="sv">Var i processen befinner du dig?</span>
+        <span data-lang="ar">أين أنت في العملية؟</span>
+        <span data-lang="uk">Де ви у процесі?</span>
+      </h2>
+      <div class="sv-label">
+        <span data-lang="en">Jump to the step that applies to you. All information is sourced directly from Migrationsverket, informationsverige.se, and official legal sources.</span>
+        <span data-lang="sv">Hoppa till det steg som gäller dig. All information hämtas direkt från officiella källor.</span>
+        <span data-lang="ar">انتقل إلى الخطوة التي تنطبق عليك. جميع المعلومات مصدرها مصادر رسمية مباشرة.</span>
+        <span data-lang="uk">Перейдіть до кроку, який стосується вас. Вся інформація з офіційних джерел.</span>
+      </div>
+      <div class="option-chips" style="margin-top:16px; flex-direction:column; align-items:flex-start; gap:8px">
+        <div class="chip selected" onclick="showAsylumStep('as-apply', this)">
+          <span data-lang="en">I just arrived — how do I apply for asylum?</span>
+          <span data-lang="sv">Jag har precis anlänt — hur ansöker jag om asyl?</span>
+          <span data-lang="ar">لقد وصلت للتو — كيف أتقدم بطلب اللجوء؟</span>
+          <span data-lang="uk">Я щойно прибув — як подати заяву на притулок?</span>
+        </div>
+        <div class="chip" onclick="showAsylumStep('as-waiting', this)">
+          <span data-lang="en">I applied — what happens while I wait?</span>
+          <span data-lang="sv">Jag har ansökt — vad händer medan jag väntar?</span>
+          <span data-lang="ar">لقد تقدمت بطلب — ماذا يحدث أثناء الانتظار؟</span>
+          <span data-lang="uk">Я подав заяву — що відбувається поки я чекаю?</span>
+        </div>
+        <div class="chip" onclick="showAsylumStep('as-approved', this)">
+          <span data-lang="en">My application was approved — what now?</span>
+          <span data-lang="sv">Min ansökan godkändes — vad händer nu?</span>
+          <span data-lang="ar">تمت الموافقة على طلبي — ماذا الآن؟</span>
+          <span data-lang="uk">Мою заяву схвалено — що тепер?</span>
+        </div>
+        <div class="chip" onclick="showAsylumStep('as-rejected', this)">
+          <span data-lang="en">My application was rejected — can I appeal?</span>
+          <span data-lang="sv">Min ansökan avslogs — kan jag överklaga?</span>
+          <span data-lang="ar">رُفض طلبي — هل يمكنني الاستئناف؟</span>
+          <span data-lang="uk">Мою заяву відхилено — чи можу я подати апеляцію?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP: APPLYING ── -->
+    <div id="as-apply" class="steps-container" style="margin-top:0">
+
+      <div class="step-card" id="aa1">
+        <div class="step-header" onclick="toggleStep('aa1')">
+          <div class="step-num" style="background:#006AA7">01</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Arrive in Sweden — tell police or border control you want asylum</span>
+              <span data-lang="sv">Anländ i Sverige — berätta för polisen eller gränskontrollen att du vill söka asyl</span>
+              <span data-lang="ar">الوصول إلى السويد — أخبر الشرطة أو مراقبة الحدود أنك تريد طلب اللجوء</span>
+              <span data-lang="uk">Прибуття до Швеції — повідомте поліцію або прикордонний контроль що хочете отримати притулок</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">
+              <span data-lang="en">First action</span><span data-lang="sv">Första åtgärd</span><span data-lang="ar">الإجراء الأول</span><span data-lang="uk">Перша дія</span>
+            </div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Migrationsverket</div>
+            <a href="https://www.migrationsverket.se/en/you-want-to-apply/asylum/applying-for-asylum.html" target="_blank">migrationsverket.se → You want to apply → Asylum → Applying for asylum</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">
+              <span data-lang="en">Plain language</span><span data-lang="sv">Klarspråk</span><span data-lang="ar">لغة بسيطة</span><span data-lang="uk">Проста мова</span>
+            </div>
+            <p>
+              <span data-lang="en">You cannot apply for asylum before you arrive in Sweden. You must be physically present in Sweden or at a Swedish border. If you meet border police at an airport, ferry terminal, or land crossing — tell them: <em>"I want to apply for asylum."</em> They will refer you to Migrationsverket.</span>
+              <span data-lang="sv">Du kan inte ansöka om asyl innan du anländer till Sverige. Du måste vara fysiskt närvarande i Sverige. Om du möter gränspolisen — säg: <em>"Jag vill söka asyl."</em></span>
+              <span data-lang="ar">لا يمكنك التقدم بطلب اللجوء قبل وصولك إلى السويد. يجب أن تكون حاضراً جسدياً. إذا قابلت شرطة الحدود، قل: <em>"أريد طلب اللجوء."</em></span>
+              <span data-lang="uk">Ви не можете подати заяву на притулок до прибуття до Швеції. Якщо ви зустрінете прикордонну поліцію — скажіть: <em>"Я хочу подати заяву на притулок."</em></span>
+            </p>
+            <p>
+              <span data-lang="en">If you are already inside Sweden, go directly to a Migrationsverket asylum application unit. There are three: Stockholm, Gothenburg, and Malmö.</span>
+              <span data-lang="sv">Om du redan befinner dig i Sverige, gå direkt till en ansökningsenhet. Det finns tre: Stockholm, Göteborg och Malmö.</span>
+              <span data-lang="ar">إذا كنت بالفعل داخل السويد، اذهب مباشرةً إلى وحدة تقديم طلبات اللجوء. هناك ثلاث وحدات: ستوكهولم وغوتنبرغ ومالمو.</span>
+              <span data-lang="uk">Якщо ви вже всередині Швеції, йдіть безпосередньо до відділу подачі заяв на притулок. Їх три: Стокгольм, Гетеборг і Мальме.</span>
+            </p>
+            <div class="plain-language-disclaimer">
+              <span data-lang="en">Simplified explanation. The legally binding text is at the official Migrationsverket link above.</span>
+              <span data-lang="sv">Förenklad förklaring. Juridiskt bindande text finns på den officiella länken ovan.</span>
+              <span data-lang="ar">شرح مبسط. النص الملزم قانوناً موجود في الرابط الرسمي أعلاه.</span>
+              <span data-lang="uk">Спрощене пояснення. Юридично обов'язковий текст за офіційним посиланням вище.</span>
+            </div>
+          </div>
+          <div class="highlight-note">
+            <span data-lang="en">Children arriving without parents can also apply in Boden, Norrköping, Sundsvall, Umeå, Uppsala and Örebro. Source: informationsverige.se</span>
+            <span data-lang="sv">Barn som anländer utan föräldrar kan också ansöka i Boden, Norrköping, Sundsvall, Umeå, Uppsala och Örebro.</span>
+            <span data-lang="ar">يمكن للأطفال الذين يصلون بدون والدين أيضاً التقدم بطلباتهم في مدن أخرى.</span>
+            <span data-lang="uk">Діти, що прибувають без батьків, можуть також подати заяву в Боден, Норрчепінг, Сундсвалль, Умео, Упсала та Еребру.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="aa2">
+        <div class="step-header" onclick="toggleStep('aa2')">
+          <div class="step-num" style="background:#006AA7">02</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Registration — fingerprints, photo, identity documents</span>
+              <span data-lang="sv">Registrering — fingeravtryck, foto, identitetshandlingar</span>
+              <span data-lang="ar">التسجيل — بصمات الأصابع والصورة ووثائق الهوية</span>
+              <span data-lang="uk">Реєстрація — відбитки пальців, фото, посвідчення особи</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">Required</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — informationsverige.se</div>
+            <a href="https://www.informationsverige.se/en/jag-ar-asylsokande/att-soka-asyl-i-sverige/att-ansoka-om-asyl.html" target="_blank">informationsverige.se → Applying for asylum</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">At registration, Migrationsverket will: take your photograph, take your fingerprints (to check if you have applied for asylum elsewhere in Europe), ask questions about who you are and where you come from, and ask you to hand in your passport or identity documents. You will receive an Asylum Seeker card (LMA card) as proof that you have applied.</span>
+              <span data-lang="sv">Vid registreringen tar Migrationsverket ditt foto, dina fingeravtryck, ställer frågor om vem du är och var du kommer från, och ber dig lämna in ditt pass. Du får ett LMA-kort som bevis på att du har ansökt.</span>
+              <span data-lang="ar">عند التسجيل، ستقوم ميغراتيونسفيركيت بأخذ صورتك وبصمات أصابعك، وطرح أسئلة حول هويتك، وطلب تسليم جواز سفرك. ستحصل على بطاقة طالب اللجوء (LMA) كدليل على تقدمك بالطلب.</span>
+              <span data-lang="uk">При реєстрації Міграційне агентство зробить ваше фото, візьме відбитки пальців, поставить питання про вашу особу і попросить здати паспорт. Ви отримаєте карту шукача притулку (LMA) як доказ подачі заяви.</span>
+            </p>
+            <div class="plain-language-disclaimer">
+              <span data-lang="en">Simplified. Verify at the official source above.</span>
+              <span data-lang="sv">Förenklad. Verifiera på officiell källa ovan.</span>
+              <span data-lang="ar">مبسط. تحقق من المصدر الرسمي أعلاه.</span>
+              <span data-lang="uk">Спрощено. Перевірте в офіційному джерелі вище.</span>
+            </div>
+          </div>
+          <ul class="checklist">
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Passport or identity documents — hand these to Migrationsverket at registration</span><span data-lang="sv">Pass eller identitetshandlingar — lämna dessa till Migrationsverket vid registrering</span><span data-lang="ar">جواز السفر أو وثائق الهوية</span><span data-lang="uk">Паспорт або посвідчення особи</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Any documents supporting your reasons for seeking asylum — bring everything you have</span><span data-lang="sv">Alla handlingar som stödjer dina asylskäl — ta med allt du har</span><span data-lang="ar">أي وثائق تدعم أسباب طلب اللجوء</span><span data-lang="uk">Будь-які документи на підтримку причин заяви на притулок</span></span><span class="check-required">BRING IF AVAILABLE</span></li>
+          </ul>
+          <div class="unknown-box" style="margin-top:12px">
+            <div class="unknown-label">
+              <span data-lang="en">If you have no documents at all</span>
+              <span data-lang="sv">Om du inte har några dokument alls</span>
+              <span data-lang="ar">إذا لم يكن لديك أي وثائق على الإطلاق</span>
+              <span data-lang="uk">Якщо у вас немає жодних документів</span>
+            </div>
+            <p>
+              <span data-lang="en">Klartväg cannot advise on this. Migrationsverket will still register your application. Contact a legal aid organisation: Röda Korset (redcross.se), Rädda Barnen (raddabarnen.se), or UNHCR Sweden (unhcr.org/se).</span>
+              <span data-lang="sv">Klartväg kan inte ge råd om detta. Migrationsverket registrerar ändå din ansökan. Kontakta en rättshjälpsorganisation: Röda Korset, Rädda Barnen eller UNHCR Sverige.</span>
+              <span data-lang="ar">لا يستطيع كلارتفاغ تقديم المشورة بشأن هذا. ستسجل ميغراتيونسفيركيت طلبك مع ذلك. اتصل بمنظمة المساعدة القانونية.</span>
+              <span data-lang="uk">Klartväg не може давати поради з цього приводу. Міграційне агентство все одно зареєструє вашу заяву. Зверніться до організації правової допомоги.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="aa3">
+        <div class="step-header" onclick="toggleStep('aa3')">
+          <div class="step-num" style="background:#006AA7">03</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Asylum investigation interview</span>
+              <span data-lang="sv">Asylutredningsintervju</span>
+              <span data-lang="ar">مقابلة التحقيق في طلب اللجوء</span>
+              <span data-lang="uk">Співбесіда для розгляду заяви на притулок</span>
+            </div>
+          </div>
+          <div class="step-status">
+            <div class="status-dot required"></div>
+            <div class="status-text" style="color:#7a1a1a">Required</div>
+          </div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Migrationsverket</div>
+            <a href="https://www.migrationsverket.se/en/you-are-waiting-for-a-decision/asylum/you-have-applied-for-asylum.html" target="_blank">migrationsverket.se → Waiting for a decision → Asylum</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">A case officer will interview you in detail about why you left your country and why you cannot return. An interpreter will help you. You have the right to have a public counsel (legal representative) present. You must attend every meeting you are summoned to — missing a meeting can delay or harm your case.</span>
+              <span data-lang="sv">En handläggare intervjuar dig i detalj om varför du lämnade ditt land och varför du inte kan återvända. En tolk hjälper dig. Du har rätt att ha ett offentligt biträde (rättslig representant) med dig.</span>
+              <span data-lang="ar">سيقابلك مسؤول الحالة بالتفصيل حول سبب مغادرتك لبلدك. سيساعدك مترجم. لديك الحق في وجود مستشار قانوني عام. يجب عليك حضور كل اجتماع تُستدعى إليه.</span>
+              <span data-lang="uk">Офіцер справи детально розпитає вас про те, чому ви покинули свою країну. Перекладач допоможе вам. Ви маєте право мати присутнього державного адвоката. Ви повинні відвідувати всі призначені зустрічі.</span>
+            </p>
+            <div class="plain-language-disclaimer">
+              <span data-lang="en">Simplified. Verify at the official source above.</span><span data-lang="sv">Förenklad.</span><span data-lang="ar">مبسط.</span><span data-lang="uk">Спрощено.</span>
+            </div>
+          </div>
+          <div class="unknown-box">
+            <div class="unknown-label">
+              <span data-lang="en">How long until the interview — Klartväg cannot say</span>
+              <span data-lang="sv">Hur lång tid tills intervjun — Klartväg kan inte svara</span>
+              <span data-lang="ar">كم من الوقت حتى المقابلة — لا يستطيع كلارتفاغ الإجابة</span>
+              <span data-lang="uk">Скільки часу до співбесіди — Klartväg не може відповісти</span>
+            </div>
+            <p>
+              <span data-lang="en">Every case is handled individually. The average total processing time was 187 days in 2024 (source: Migrationsverket Annual Report 2024). Klartväg does not estimate your individual timeline. Check current waiting times at migrationsverket.se/en/contact-us/waiting-times.html</span>
+              <span data-lang="sv">Varje ärende hanteras individuellt. Den genomsnittliga totala handläggningstiden var 187 dagar 2024. Klartväg beräknar inte din individuella tidslinje.</span>
+              <span data-lang="ar">يُعالج كل طلب بشكل فردي. كان متوسط وقت المعالجة الكلي 187 يوماً في 2024. لا يقدر كلارتفاغ جدولك الزمني الفردي.</span>
+              <span data-lang="uk">Кожна справа розглядається індивідуально. Середній загальний час розгляду становив 187 днів у 2024 році. Klartväg не оцінює вашу індивідуальну часову шкалу.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── STEP: WAITING ── -->
+    <div id="as-waiting" class="steps-container" style="display:none; margin-top:0">
+
+      <div class="step-card" id="aw1">
+        <div class="step-header" onclick="toggleStep('aw1')">
+          <div class="step-num" style="background:#1a5c3a">01</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Accommodation — where you must live</span>
+              <span data-lang="sv">Boende — var du måste bo</span>
+              <span data-lang="ar">السكن — أين يجب أن تعيش</span>
+              <span data-lang="uk">Проживання — де ви повинні жити</span>
+            </div>
+          </div>
+          <div class="step-status"><div class="status-dot required"></div><div class="status-text" style="color:#7a1a1a">Rule changed 2025</div></div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Migrationsverket</div>
+            <a href="https://www.migrationsverket.se/en/you-are-waiting-for-a-decision/asylum/you-have-applied-for-asylum/accommodation.html" target="_blank">migrationsverket.se → Accommodation for asylum seekers</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="outdated-warning">
+            <span class="warn-icon">⚠</span>
+            <p>
+              <span data-lang="en"><strong>Rule changed September 2025.</strong> From 1 September 2025, you must live in the accommodation allocated by Migrationsverket to receive daily allowance and special grant. If you live elsewhere (except with immediate family already in Sweden), you will not receive financial support. Verify current rules at the official source above.</span>
+              <span data-lang="sv"><strong>Regeln ändrades september 2025.</strong> Från 1 september 2025 måste du bo i det boende som Migrationsverket tilldelar dig för att få dagersättning. Verifiera aktuella regler på den officiella källan ovan.</span>
+              <span data-lang="ar"><strong>تغيرت القاعدة في سبتمبر 2025.</strong> اعتباراً من 1 سبتمبر 2025، يجب أن تعيش في السكن المخصص من قِبَل ميغراتيونسفيركيت لتلقي البدل اليومي.</span>
+              <span data-lang="uk"><strong>Правило змінилося у вересні 2025 року.</strong> З 1 вересня 2025 року ви повинні проживати в житлі, виділеному Міграційним агентством, щоб отримувати добові та спеціальні гранти.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" id="aw2">
+        <div class="step-header" onclick="toggleStep('aw2')">
+          <div class="step-num" style="background:#1a5c3a">02</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">Can I work while waiting? — AT-UND</span>
+              <span data-lang="sv">Kan jag arbeta medan jag väntar? — AT-UND</span>
+              <span data-lang="ar">هل يمكنني العمل أثناء الانتظار؟ — AT-UND</span>
+              <span data-lang="uk">Чи можу я працювати під час очікування? — AT-UND</span>
+            </div>
+          </div>
+          <div class="step-status"><div class="status-dot info"></div><div class="status-text" style="color:#1a4a7a">Possible</div></div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Migrationsverket</div>
+            <a href="https://www.migrationsverket.se/en/you-are-waiting-for-a-decision/asylum/you-have-applied-for-asylum/work.html" target="_blank">migrationsverket.se → Work for asylum seekers (AT-UND)</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en">You may be able to work while waiting for your decision. The exemption from the work permit requirement is called AT-UND. Migrationsverket assesses whether you qualify after you submit your asylum application. If granted, AT-UND is recorded directly on your LMA card. Anyone over 16 needs AT-UND to work legally.</span>
+              <span data-lang="sv">Du kanske kan arbeta medan du väntar. Undantaget från kravet på arbetstillstånd kallas AT-UND. Migrationsverket bedömer om du kvalificerar efter att du lämnat in din asylansökan. Om det beviljas registreras AT-UND direkt på ditt LMA-kort.</span>
+              <span data-lang="ar">قد تتمكن من العمل أثناء انتظار قرارك. يُسمى الإعفاء من اشتراط تصريح العمل AT-UND. تقيّم ميغراتيونسفيركيت ما إذا كنت مؤهلاً بعد تقديم طلب اللجوء.</span>
+              <span data-lang="uk">Можливо, ви зможете працювати під час очікування. Звільнення від вимоги дозволу на роботу називається AT-UND. Міграційне агентство оцінює ваше право після подачі заяви. Якщо надано — фіксується прямо на картці LMA.</span>
+            </p>
+            <div class="plain-language-disclaimer">
+              <span data-lang="en">Simplified. AT-UND eligibility is assessed individually. Verify at the official source above.</span>
+              <span data-lang="sv">Förenklad. AT-UND-behörighet bedöms individuellt.</span>
+              <span data-lang="ar">مبسط. تُقيَّم الأهلية لـ AT-UND بشكل فردي.</span>
+              <span data-lang="uk">Спрощено. Право на AT-UND оцінюється індивідуально.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── STEP: APPROVED ── -->
+    <div id="as-approved" class="steps-container" style="display:none; margin-top:0">
+
+      <div class="step-card" id="aap1">
+        <div class="step-header" onclick="toggleStep('aap1')">
+          <div class="step-num" style="background:#1a5c3a">01</div>
+          <div class="step-agency-tag">
+            <div class="step-agency-name">Migrationsverket</div>
+            <div class="step-title-main">
+              <span data-lang="en">What type of permit did you receive?</span>
+              <span data-lang="sv">Vilken typ av tillstånd fick du?</span>
+              <span data-lang="ar">ما نوع التصريح الذي حصلت عليه؟</span>
+              <span data-lang="uk">Який тип дозволу ви отримали?</span>
+            </div>
+          </div>
+          <div class="step-status"><div class="status-dot info"></div><div class="status-text" style="color:#1a4a7a">Know your status</div></div>
+          <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+          <div class="official-source">
+            <div class="official-source-label">Official Source — Migrationsverket</div>
+            <a href="https://www.migrationsverket.se/en/you-have-received-a-decision/asylum/your-application-for-asylum-has-been-approved.html" target="_blank">migrationsverket.se → Your application for asylum has been approved</a>
+            <div class="last-checked">Last checked: March 2026</div>
+          </div>
+          <div class="plain-language">
+            <div class="plain-language-label">Plain language</div>
+            <p>
+              <span data-lang="en"><strong>Refugee status</strong> → 3-year residence permit. <strong>Subsidiary protection</strong> → 13-month residence permit. Both allow you to live and work in Sweden for the duration of the permit. Check your decision letter for which status you received.</span>
+              <span data-lang="sv"><strong>Flyktingstatus</strong> → 3-årigt uppehållstillstånd. <strong>Subsidiärt skydd</strong> → 13-månaders uppehållstillstånd. Kontrollera ditt beslutsbrev för vilken status du fick.</span>
+              <span data-lang="ar"><strong>وضع اللاجئ</strong> ← تصريح إقامة لمدة 3 سنوات. <strong>الحماية الفرعية</strong> ← تصريح إقامة لمدة 13 شهراً. كلاهما يسمح لك بالعيش والعمل في السويد.</span>
+              <span data-lang="uk"><strong>Статус біженця</strong> → дозвіл на проживання на 3 роки. <strong>Додатковий захист</strong> → дозвіл на 13 місяців. Обидва дозволяють жити і працювати в Швеції.</span>
+            </p>
+            <div class="plain-language-disclaimer">
+              <span data-lang="en">Simplified. Your exact rights depend on your specific decision. Read the full decision letter carefully.</span>
+              <span data-lang="sv">Förenklad. Dina exakta rättigheter beror på ditt specifika beslut.</span>
+              <span data-lang="ar">مبسط. تعتمد حقوقك الدقيقة على قرارك المحدد.</span>
+              <span data-lang="uk">Спрощено. Ваші точні права залежать від вашого конкретного рішення.</span>
+            </div>
+          </div>
+          <div class="handoff-box">
+            <div class="handoff-arrow">🔀</div>
+            <div class="handoff-content">
+              <div class="handoff-label">
+                <span data-lang="en">Next: register with Skatteverket for personnummer</span>
+                <span data-lang="sv">Nästa: registrera dig hos Skatteverket för personnummer</span>
+                <span data-lang="ar">التالي: التسجيل في Skatteverket للحصول على الرقم الشخصي</span>
+                <span data-lang="uk">Далі: реєстрація в Skatteverket для personnummer</span>
+              </div>
+              <div class="handoff-text">
+                <span data-lang="en">With your permit card and a valid identity document, register at Skatteverket to get your personnummer. This unlocks BankID, healthcare, and all government services. The same sequence as any new resident.</span>
+                <span data-lang="sv">Med ditt tillståndskort och giltig identitetshandling, registrera dig hos Skatteverket för personnummer. Detta låser upp BankID, sjukvård och alla samhällstjänster.</span>
+                <span data-lang="ar">بطاقة تصريحك ووثيقة هوية سارية، سجّل في Skatteverket للحصول على رقمك الشخصي. هذا يفتح BankID والرعاية الصحية.</span>
+                <span data-lang="uk">З карткою дозволу та дійсним посвідченням особи зареєструйтеся в Skatteverket для отримання personnummer.</span>
+              </div>
+              <button class="handoff-btn" onclick="window.location.href='newlife.html'">
+                <span data-lang="en">Go to: Starting life in Sweden →</span>
+                <span data-lang="sv">Gå till: Börja livet i Sverige →</span>
+                <span data-lang="ar">اذهب إلى: بدء الحياة في السويد ←</span>
+                <span data-lang="uk">Перейти до: Початок життя у Швеції →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── STEP: REJECTED — APPEAL TRACKER ── -->
+    <div id="as-rejected" style="display:none; margin-top:0">
+
+      <!-- CRITICAL ALERT -->
+      <div style="background:#7a1a1a; color:white; padding:20px 24px; margin-bottom:0">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; opacity:0.8; margin-bottom:8px">
+          <span data-lang="en">Time-critical — read this first</span>
+          <span data-lang="sv">Tidskritiskt — läs detta först</span>
+          <span data-lang="ar">حرج زمنياً — اقرأ هذا أولاً</span>
+          <span data-lang="uk">Критично за часом — прочитайте це спочатку</span>
+        </div>
+        <div style="font-family:'Source Serif 4',serif; font-size:20px; font-weight:400; margin-bottom:8px">
+          <span data-lang="en">You have <strong>3 weeks</strong> to appeal from the date you received the decision.</span>
+          <span data-lang="sv">Du har <strong>3 veckor</strong> på dig att överklaga från det datum du fick beslutet.</span>
+          <span data-lang="ar">لديك <strong>3 أسابيع</strong> للاستئناف من تاريخ تلقيك للقرار.</span>
+          <span data-lang="uk">У вас є <strong>3 тижні</strong> для подачі апеляції з дати отримання рішення.</span>
+        </div>
+        <div style="font-size:12px; opacity:0.85; line-height:1.6">
+          <span data-lang="en">Source: Swedish law. First instance decisions must be appealed within 3 weeks. The decision begins to apply 3 weeks after you received it unless you appeal. After that, it cannot be appealed.</span>
+          <span data-lang="sv">Källa: Svensk lag. Beslut i första instans måste överklagas inom 3 veckor. Beslutet börjar gälla 3 veckor efter att du fick det om du inte överklagar.</span>
+          <span data-lang="ar">المصدر: القانون السويدي. يجب الاستئناف خلال 3 أسابيع. يبدأ القرار في السريان بعد 3 أسابيع من استلامك له.</span>
+          <span data-lang="uk">Джерело: Шведське законодавство. Рішення першої інстанції повинні бути оскаржені протягом 3 тижнів. Рішення набирає чинності через 3 тижні.</span>
+        </div>
+      </div>
+
+      <!-- APPEAL DEADLINE CALCULATOR -->
+      <div class="situation-block" style="border-top:none">
+        <h2>
+          <span data-lang="en">Appeal deadline calculator</span>
+          <span data-lang="sv">Kalkylator för överklagningsdeadline</span>
+          <span data-lang="ar">حاسبة الموعد النهائي للاستئناف</span>
+          <span data-lang="uk">Калькулятор дедлайну апеляції</span>
+        </h2>
+        <div class="sv-label">
+          <span data-lang="en">Enter the date you received the decision. The tool calculates your appeal deadline based on the official 3-week rule.</span>
+          <span data-lang="sv">Ange det datum du fick beslutet. Verktyget beräknar din överklagningsdeadline baserat på den officiella 3-veckorsregeln.</span>
+          <span data-lang="ar">أدخل تاريخ استلام القرار. يحسب الأداة الموعد النهائي للاستئناف بناءً على قاعدة الـ 3 أسابيع الرسمية.</span>
+          <span data-lang="uk">Введіть дату отримання рішення. Інструмент розраховує дедлайн апеляції на основі офіційного правила 3 тижнів.</span>
+        </div>
+
+        <div class="official-source" style="margin:12px 0">
+          <div class="official-source-label">Official Source — informationsverige.se</div>
+          <a href="https://www.informationsverige.se/en/jag-ar-asylsokande/att-soka-asyl-i-sverige/beslut-om-asylansokan/avslag.html" target="_blank">informationsverige.se → Refusal → How to appeal</a>
+          <div class="last-checked">Last checked: March 2026</div>
+        </div>
+
+        <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap; margin-bottom:16px">
+          <div style="flex:1; min-width:200px">
+            <div class="question-label" style="font-size:12px; margin-bottom:6px">
+              <span data-lang="en">Date you received the decision (date served)</span>
+              <span data-lang="sv">Datum du fick beslutet (delgivningsdatum)</span>
+              <span data-lang="ar">تاريخ استلام القرار</span>
+              <span data-lang="uk">Дата отримання рішення</span>
+            </div>
+            <input type="date" id="decision-date" style="width:100%; padding:10px 12px; border:1px solid var(--border2); background:white; font-family:'IBM Plex Sans',sans-serif; font-size:14px; color:var(--ink)">
+          </div>
+          <button onclick="calculateAppealDeadline()" style="background:#7a1a1a; color:white; border:none; padding:10px 20px; font-size:14px; font-family:'IBM Plex Sans',sans-serif; font-weight:500; cursor:pointer; white-space:nowrap">
+            <span data-lang="en">Calculate deadline →</span>
+            <span data-lang="sv">Beräkna deadline →</span>
+            <span data-lang="ar">احسب الموعد النهائي ←</span>
+            <span data-lang="uk">Розрахувати дедлайн →</span>
+          </button>
+        </div>
+
+        <div id="appeal-result" style="display:none"></div>
+
+        <div class="unknown-box" style="margin-top:4px">
+          <div class="unknown-label">
+            <span data-lang="en">What this tool cannot do</span>
+            <span data-lang="sv">Vad det här verktyget inte kan göra</span>
+            <span data-lang="ar">ما لا يستطيع هذا الأداة فعله</span>
+            <span data-lang="uk">Що цей інструмент не може зробити</span>
+          </div>
+          <p>
+            <span data-lang="en">Klartväg cannot advise on the legal content of your appeal or assess your chances. For legal help: contact Röda Korset (redcross.se), UNHCR Sweden (unhcr.org/se), or the Migration Court's public counsel system. Your decision letter should state whether you are entitled to a public counsel.</span>
+            <span data-lang="sv">Klartväg kan inte ge råd om det rättsliga innehållet i ditt överklagande. För rättslig hjälp: kontakta Röda Korset, UNHCR Sverige eller migrationdomstolens offentliga biträdessystem.</span>
+            <span data-lang="ar">لا يستطيع كلارتفاغ تقديم المشورة بشأن محتوى استئنافك القانوني. للحصول على مساعدة قانونية: اتصل بالصليب الأحمر أو المفوضية السامية للأمم المتحدة لشؤون اللاجئين.</span>
+            <span data-lang="uk">Klartväg не може давати поради щодо юридичного змісту вашої апеляції. Для правової допомоги: зверніться до Червоного Хреста або УВКБ ООН.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- HOW TO APPEAL STEPS -->
+      <div class="steps-container">
+
+        <div class="step-card" id="ar1">
+          <div class="step-header" onclick="toggleStep('ar1')">
+            <div class="step-num" style="background:#7a1a1a">01</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Migrationsverket</div>
+              <div class="step-title-main">
+                <span data-lang="en">Write your appeal letter — send to Migrationsverket (not the court)</span>
+                <span data-lang="sv">Skriv ditt överklagansbrev — skicka till Migrationsverket (inte domstolen)</span>
+                <span data-lang="ar">اكتب رسالة الاستئناف — أرسلها إلى ميغراتيونسفيركيت (ليس المحكمة)</span>
+                <span data-lang="uk">Напишіть апеляційного листа — надішліть до Міграційного агентства (не до суду)</span>
+              </div>
+            </div>
+            <div class="step-status"><div class="status-dot required"></div><div class="status-text" style="color:#7a1a1a">Within 3 weeks</div></div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+            <div class="official-source">
+              <div class="official-source-label">Official Source — informationsverige.se</div>
+              <a href="https://www.informationsverige.se/en/jag-ar-asylsokande/att-soka-asyl-i-sverige/beslut-om-asylansokan/avslag.html" target="_blank">informationsverige.se → Refusal → Appealing the decision</a>
+              <div class="last-checked">Last checked: March 2026</div>
+            </div>
+            <div class="plain-language">
+              <div class="plain-language-label">Plain language</div>
+              <p>
+                <span data-lang="en">You appeal by writing a letter to Migrationsverket — not directly to the court. The letter must include: which decision you want changed, why it is wrong, your personal details, your case number (on your LMA card), and a phone number and address where you can be reached.</span>
+                <span data-lang="sv">Du överklagar genom att skriva ett brev till Migrationsverket — inte direkt till domstolen. Brevet måste innehålla: vilket beslut du vill ändra, varför det är fel, dina personuppgifter, ditt ärendenummer och ett telefonnummer.</span>
+                <span data-lang="ar">تستأنف بكتابة رسالة إلى ميغراتيونسفيركيت — ليس مباشرةً إلى المحكمة. يجب أن تتضمن الرسالة: القرار الذي تريد تغييره، ولماذا هو خاطئ، ومعلوماتك الشخصية، ورقم قضيتك.</span>
+                <span data-lang="uk">Ви подаєте апеляцію написавши листа до Міграційного агентства — не безпосередньо до суду. Лист повинен містити: яке рішення ви хочете змінити, чому воно неправильне, ваші особисті дані, номер вашої справи.</span>
+              </p>
+              <div class="plain-language-disclaimer">
+                <span data-lang="en">Simplified. The address to send your appeal to is stated in your decision letter. Klartväg cannot reproduce this as it varies by case.</span>
+                <span data-lang="sv">Förenklad. Adressen dit du ska skicka ditt överklagande finns i ditt beslutsbrev.</span>
+                <span data-lang="ar">مبسط. العنوان المراد إرسال استئنافك إليه مذكور في خطاب قرارك.</span>
+                <span data-lang="uk">Спрощено. Адреса для надсилання апеляції вказана у вашому листі з рішенням.</span>
+              </div>
+            </div>
+            <ul class="checklist">
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Which decision you want Migrationsverket to change</span><span data-lang="sv">Vilket beslut du vill att Migrationsverket ska ändra</span><span data-lang="ar">القرار الذي تريد تغييره</span><span data-lang="uk">Яке рішення ви хочете змінити</span></span><span class="check-required">REQUIRED</span></li>
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Why the decision is wrong — your reasons</span><span data-lang="sv">Varför beslutet är fel — dina skäl</span><span data-lang="ar">لماذا القرار خاطئ — أسبابك</span><span data-lang="uk">Чому рішення неправильне — ваші причини</span></span><span class="check-required">REQUIRED</span></li>
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Your full name, date of birth, and case number (on your LMA card)</span><span data-lang="sv">Ditt fullständiga namn, födelsedatum och ärendenummer (på ditt LMA-kort)</span><span data-lang="ar">اسمك الكامل وتاريخ الميلاد ورقم القضية (على بطاقة LMA)</span><span data-lang="uk">Ваше повне ім'я, дата народження та номер справи (на картці LMA)</span></span><span class="check-required">REQUIRED</span></li>
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Phone number and address where Migrationsverket or the court can reach you</span><span data-lang="sv">Telefonnummer och adress där Migrationsverket eller domstolen kan nå dig</span><span data-lang="ar">رقم هاتف وعنوان يمكن للوكالة أو المحكمة الوصول إليك فيه</span><span data-lang="uk">Номер телефону та адреса, за якою агентство або суд може з вами зв'язатися</span></span><span class="check-required">REQUIRED</span></li>
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Your signature</span><span data-lang="sv">Din underskrift</span><span data-lang="ar">توقيعك</span><span data-lang="uk">Ваш підпис</span></span><span class="check-required">REQUIRED</span></li>
+              <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Any new documents or evidence not previously submitted</span><span data-lang="sv">Eventuella nya handlingar eller bevis som inte tidigare lämnats in</span><span data-lang="ar">أي وثائق أو أدلة جديدة لم تُقدَّم سابقاً</span><span data-lang="uk">Будь-які нові документи або докази, що раніше не подавались</span></span><span class="check-required">IF AVAILABLE</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card" id="ar2">
+          <div class="step-header" onclick="toggleStep('ar2')">
+            <div class="step-num" style="background:#7a1a1a">02</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Migrationsverket → Migrationsdomstolen</div>
+              <div class="step-title-main">
+                <span data-lang="en">What happens after you appeal</span>
+                <span data-lang="sv">Vad händer efter att du överklagar</span>
+                <span data-lang="ar">ما يحدث بعد الاستئناف</span>
+                <span data-lang="uk">Що відбувається після подачі апеляції</span>
+              </div>
+            </div>
+            <div class="step-status"><div class="status-dot info"></div><div class="status-text" style="color:#1a4a7a">Process</div></div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+            <div class="official-source">
+              <div class="official-source-label">Official Source — ECRE/AIDA Sweden 2024</div>
+              <a href="https://asylumineurope.org/reports/country/sweden/asylum-procedure/general/short-overview-asylum-procedure/" target="_blank">asylumineurope.org → Sweden → Short overview of asylum procedure</a>
+              <div class="last-checked">Last checked: March 2026</div>
+            </div>
+            <div class="plain-language">
+              <div class="plain-language-label">Plain language</div>
+              <p>
+                <span data-lang="en">Migrationsverket reviews your appeal first. If they agree your case should be changed, they issue a new decision. If they do not agree, they forward your appeal to the Migration Court (Migrationsdomstolen) — one of four courts in Stockholm, Gothenburg, Malmö, or Luleå.</span>
+                <span data-lang="sv">Migrationsverket granskar ditt överklagande först. Om de håller med, utfärdar de ett nytt beslut. Om de inte håller med, skickar de ditt överklagande till Migrationsdomstolen.</span>
+                <span data-lang="ar">تراجع ميغراتيونسفيركيت استئنافك أولاً. إذا وافقوا، يصدرون قراراً جديداً. إذا لم يوافقوا، يحيلون استئنافك إلى محكمة الهجرة.</span>
+                <span data-lang="uk">Міграційне агентство спочатку розглядає вашу апеляцію. Якщо вони погоджуються, видають нове рішення. Якщо ні, надсилають вашу апеляцію до Міграційного суду.</span>
+              </p>
+              <p>
+                <span data-lang="en">Filing an appeal has suspensive effect — meaning you do not have to leave Sweden while the appeal is being processed (with some exceptions for manifestly unfounded claims). In 2024, Migration Courts overturned Migrationsverket decisions in 5% of regular asylum cases.</span>
+                <span data-lang="sv">Att överklaga har suspensiv effekt — du behöver inte lämna Sverige medan överklagandet behandlas (med undantag för uppenbart ogrundade ansökningar). År 2024 underkände migrationsdomstolarna Migrationsverkets beslut i 5 % av reguljära asylärenden.</span>
+                <span data-lang="ar">تقديم الاستئناف له أثر تعليقي — مما يعني أنك لست مضطراً لمغادرة السويد أثناء معالجة الاستئناف. في 2024، ألغت محاكم الهجرة قرارات ميغراتيونسفيركيت في 5٪ من قضايا اللجوء العادية.</span>
+                <span data-lang="uk">Подача апеляції має зупиняючий ефект — ви не зобов'язані залишати Швецію під час розгляду. У 2024 році суди скасували рішення агентства у 5% звичайних справ про притулок.</span>
+              </p>
+              <div class="plain-language-disclaimer">
+                <span data-lang="en">Simplified. The 5% figure is from official ECRE/AIDA data. Suspensive effect rules have exceptions — verify your specific situation with legal counsel.</span>
+                <span data-lang="sv">Förenklad. 5%-siffran är från officiella ECRE/AIDA-data. Reglerna om suspensiv effekt har undantag — verifiera med juridisk rådgivning.</span>
+                <span data-lang="ar">مبسط. رقم 5٪ من بيانات ECRE/AIDA الرسمية. تحقق من وضعك المحدد مع المستشار القانوني.</span>
+                <span data-lang="uk">Спрощено. Цифра 5% з офіційних даних ECRE/AIDA. Перевірте вашу конкретну ситуацію з юридичним радником.</span>
+              </div>
+            </div>
+            <div class="outdated-warning" style="margin-top:8px">
+              <span class="warn-icon">⚠</span>
+              <p>
+                <span data-lang="en"><strong>Rule abolished April 2025:</strong> It is no longer possible to stay in Sweden by changing track and applying for a work permit after an asylum rejection. If your application is rejected, you must leave Sweden before applying for a work permit. Source: informationsverige.se</span>
+                <span data-lang="sv"><strong>Regel avskaffad april 2025:</strong> Det är inte längre möjligt att stanna i Sverige genom spårbyte och ansöka om arbetstillstånd efter ett asylbeslut. Källa: informationsverige.se</span>
+                <span data-lang="ar"><strong>قاعدة ألغيت في أبريل 2025:</strong> لم يعد من الممكن البقاء في السويد عن طريق تغيير المسار والتقدم بطلب تصريح عمل بعد رفض اللجوء.</span>
+                <span data-lang="uk"><strong>Правило скасоване у квітні 2025:</strong> Більше неможливо залишатися у Швеції шляхом зміни треку та подачі заяви на дозвіл на роботу після відмови у притулку.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn active">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script src="tools.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>

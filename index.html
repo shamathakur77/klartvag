@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klartväg — Sweden Migration Navigator</title>
+<meta name="description" content="Free, accurate, plain-language guide to Sweden's migration system. Work permits, asylum, family reunification, new resident onboarding — in Swedish, English, Arabic, and Ukrainian.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; margin-bottom: 40px; background: var(--border); border: 1px solid var(--border); }
+.stat-box { padding: 20px 24px; background: white; }
+.stat-num { font-family: 'IBM Plex Mono', monospace; font-size: 32px; color: var(--swedish-blue); font-weight: 500; line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 10px; color: var(--ink3); letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.5; }
+.news-strip { background: white; border: 1px solid var(--border); margin-bottom: 32px; }
+.news-strip-header { background: var(--bg2); padding: 10px 20px; font-size: 10px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink3); border-bottom: 1px solid var(--border); }
+.news-item { padding: 14px 20px; border-bottom: 1px solid var(--bg2); display: flex; gap: 12px; align-items: flex-start; }
+.news-item:last-child { border-bottom: none; }
+.news-tag { font-size: 10px; font-family: 'IBM Plex Mono', monospace; padding: 2px 7px; border: 1px solid; flex-shrink: 0; margin-top: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+.news-tag.reform { color: #1a5c3a; border-color: #1a5c3a40; background: var(--green-light); }
+.news-tag.change { color: var(--warn); border-color: #ffcc8080; background: var(--warn-bg); }
+.news-text { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+.news-text a { color: var(--swedish-blue); }
+</style>
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+<div class="law-banner">
+  <span class="law-banner-tag">
+    <span data-lang="en">Law changing</span>
+    <span data-lang="sv">Lag ändras</span>
+    <span data-lang="ar">تغيير قانوني</span>
+    <span data-lang="uk">Зміна закону</span>
+  </span>
+  <span data-lang="en"><strong>Major labour immigration reform enters force 1 June 2026.</strong> Salary threshold rising, new employer penalties, Blue Card extended to 4 years. <a href="reform.html">What this means →</a></span>
+  <span data-lang="sv"><strong>Stor reform för arbetskraftsinvandring träder i kraft 1 juni 2026.</strong> Lönetröskel höjs, nya arbetsgivarstraff, Blue Card förlängs till 4 år. <a href="reform.html">Vad det innebär →</a></span>
+  <span data-lang="ar"><strong>إصلاح كبير لهجرة العمالة يدخل حيز التنفيذ في 1 يونيو 2026.</strong> <a href="reform.html">ما يعنيه هذا ←</a></span>
+  <span data-lang="uk"><strong>Масштабна реформа трудової міграції набуває чинності 1 червня 2026 року.</strong> <a href="reform.html">Що це означає →</a></span>
+</div>
+
+<div class="app page-enter">
+
+  <div class="hero">
+    <div class="hero-tag">
+      <span data-lang="en">Sweden Migration Intelligence Platform</span>
+      <span data-lang="sv">Sveriges migrationsinformationssystem</span>
+      <span data-lang="ar">منصة الهجرة السويدية</span>
+      <span data-lang="uk">Платформа міграції Швеції</span>
+    </div>
+    <h1>
+      <span data-lang="en">Your <strong>clear path</strong> through Sweden's migration system</span>
+      <span data-lang="sv">Din <strong>klara väg</strong> genom Sveriges migrationssystem</span>
+      <span data-lang="ar">طريقك <strong>الواضح</strong> عبر نظام الهجرة السويدي</span>
+      <span data-lang="uk">Ваш <strong>чіткий шлях</strong> через шведську систему міграції</span>
+    </h1>
+    <p class="hero-sub">
+      <span data-lang="en">Official information, plain language, five agencies — one place. Every piece of guidance links to the official source. No interpretation. No guesswork.</span>
+      <span data-lang="sv">Officiell information, klarspråk, fem myndigheter — ett ställe. All vägledning länkar till den officiella källan.</span>
+      <span data-lang="ar">معلومات رسمية، لغة بسيطة، خمس وكالات — مكان واحد. لا تفسير، لا تخمين.</span>
+      <span data-lang="uk">Офіційна інформація, проста мова, п'ять агентств — одне місце. Без інтерпретацій.</span>
+    </p>
+    <div class="accuracy-badge">
+      <span data-lang="en">All content sourced from official Swedish government URLs — verified March 2026</span>
+      <span data-lang="sv">Allt innehåll från officiella svenska myndighets-URL:er — verifierat mars 2026</span>
+      <span data-lang="ar">جميع المحتوى من عناوين URL الحكومية الرسمية — تم التحقق منه مارس 2026</span>
+      <span data-lang="uk">Весь вміст з офіційних URL шведського уряду — перевірено березень 2026</span>
+    </div>
+  </div>
+
+  <!-- LIVE STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num">18</div>
+      <div class="stat-label">Days avg<br>Category A permit</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">187</div>
+      <div class="stat-label">Days avg<br>asylum decision</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">400</div>
+      <div class="stat-label">Days avg<br>family reunification</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">Rejections from<br>missing documents</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num threshold-num">SEK 29,680</div>
+      <div class="stat-label">Min salary<br>work permit 2025</div>
+    </div>
+  </div>
+
+  <!-- WHAT'S CHANGED NEWS STRIP -->
+  <div class="news-strip">
+    <div class="news-strip-header">
+      <span data-lang="en">Recent changes — know before you apply</span>
+      <span data-lang="sv">Senaste ändringar — vet innan du ansöker</span>
+      <span data-lang="ar">التغييرات الأخيرة — اعرف قبل أن تتقدم</span>
+      <span data-lang="uk">Останні зміни — дізнайтеся перед подачею заяви</span>
+    </div>
+    <div class="news-item">
+      <span class="news-tag reform">June 2026</span>
+      <div class="news-text">
+        <span data-lang="en">New labour immigration law raises salary threshold to 90% of median (~SEK 33,390/month), doubles employer penalties for illegal hiring, extends Blue Card to 4 years. <a href="reform.html">Full breakdown →</a></span>
+        <span data-lang="sv">Ny lag höjer lönegräns till 90% av medianlön (~33 390 kr/mån), fördubblar straff för olaglig anställning, förlänger Blue Card till 4 år. <a href="reform.html">Fullständig genomgång →</a></span>
+        <span data-lang="ar">قانون جديد يرفع عتبة الراتب إلى 90٪ من المتوسط، يضاعف عقوبات أصحاب العمل. <a href="reform.html">تفاصيل كاملة ←</a></span>
+        <span data-lang="uk">Новий закон підвищує поріг зарплати до 90% медіани, подвоює штрафи для роботодавців. <a href="reform.html">Повний огляд →</a></span>
+      </div>
+    </div>
+    <div class="news-item">
+      <span class="news-tag change">April 2025</span>
+      <div class="news-text">
+        <span data-lang="en">Track change abolished. Rejected asylum seekers can no longer switch to a work permit without leaving Sweden first. Source: informationsverige.se</span>
+        <span data-lang="sv">Spårbytet avskaffat. Avvisade asylsökande kan inte längre byta till arbetstillstånd utan att lämna Sverige. Källa: informationsverige.se</span>
+        <span data-lang="ar">تم إلغاء تغيير المسار. لا يمكن للاجئين المرفوضين الانتقال إلى تصريح عمل دون مغادرة السويد.</span>
+        <span data-lang="uk">Зміну треку скасовано. Відхилені прохачі притулку більше не можуть переходити на дозвіл на роботу, не покидаючи Швецію.</span>
+      </div>
+    </div>
+    <div class="news-item">
+      <span class="news-tag change">Sept 2025</span>
+      <div class="news-text">
+        <span data-lang="en">Asylum seekers must now live in Migrationsverket-assigned accommodation to receive daily allowance. Own accommodation = no financial support (with limited exceptions). Source: migrationsverket.se</span>
+        <span data-lang="sv">Asylsökande måste nu bo i Migrationsverkets anvisade boende för att få dagersättning. Eget boende = inget ekonomiskt stöd. Källa: migrationsverket.se</span>
+        <span data-lang="ar">يجب على طالبي اللجوء الآن العيش في السكن المخصص لتلقي البدل اليومي. السكن الخاص = لا دعم مالي.</span>
+        <span data-lang="uk">Шукачі притулку тепер повинні жити у виділеному житлі для отримання добових. Власне житло = відсутня фінансова підтримка.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO ARE YOU -->
+  <div class="section-label">
+    <span data-lang="en">Who are you in this system?</span>
+    <span data-lang="sv">Vem är du i det här systemet?</span>
+    <span data-lang="ar">من أنت في هذا النظام؟</span>
+    <span data-lang="uk">Хто ви в цій системі?</span>
+  </div>
+
+  <div class="who-grid">
+    <a href="expat.html" class="who-card">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">✈️</span>
+      <div class="who-title">
+        <span data-lang="en">Expat / Skilled Worker</span>
+        <span data-lang="sv">Expat / Kvalificerad arbetstagare</span>
+        <span data-lang="ar">مغترب / عامل ماهر</span>
+        <span data-lang="uk">Експат / Кваліфікований працівник</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Work permit, permit renewal, job change</span>
+        <span data-lang="sv">Arbetstillstånd, förnyelse, jobbbyte</span>
+        <span data-lang="ar">تصريح عمل، تجديد، تغيير وظيفة</span>
+        <span data-lang="uk">Дозвіл на роботу, продовження, зміна роботи</span>
+      </div>
+    </a>
+
+    <a href="employer.html" class="who-card">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">🏢</span>
+      <div class="who-title">
+        <span data-lang="en">Employer / HR</span>
+        <span data-lang="sv">Arbetsgivare / HR</span>
+        <span data-lang="ar">صاحب عمل / موارد بشرية</span>
+        <span data-lang="uk">Роботодавець / HR</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Category checker, permit tracker, document checklist</span>
+        <span data-lang="sv">Kategorikontroll, tillståndsspårare, checklista</span>
+        <span data-lang="ar">فحص الفئة، تتبع التصريح، قائمة التحقق</span>
+        <span data-lang="uk">Перевірка категорії, відстеження дозволів</span>
+      </div>
+    </a>
+
+    <a href="asylum.html" class="who-card">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">🏠</span>
+      <div class="who-title">
+        <span data-lang="en">Asylum Seeker / Refugee</span>
+        <span data-lang="sv">Asylsökande / Flykting</span>
+        <span data-lang="ar">طالب لجوء / لاجئ</span>
+        <span data-lang="uk">Шукач притулку / Біженець</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Applying, waiting, appeal deadline calculator</span>
+        <span data-lang="sv">Ansöka, vänta, kalkylator för överklagande</span>
+        <span data-lang="ar">التقديم، الانتظار، حاسبة الاستئناف</span>
+        <span data-lang="uk">Подача, очікування, калькулятор апеляції</span>
+      </div>
+    </a>
+
+    <a href="family.html" class="who-card">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">👨‍👩‍👧</span>
+      <div class="who-title">
+        <span data-lang="en">Family Reunification</span>
+        <span data-lang="sv">Anhöriginvandring</span>
+        <span data-lang="ar">لم شمل الأسرة</span>
+        <span data-lang="uk">Возз'єднання сім'ї</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Joining family in Sweden, 400-day wait, what to do</span>
+        <span data-lang="sv">Återförenas med familj, 400 dagars väntan</span>
+        <span data-lang="ar">الانضمام للعائلة في السويد، انتظار 400 يوم</span>
+        <span data-lang="uk">Возз'єднання з сім'єю, 400 днів очікування</span>
+      </div>
+    </a>
+
+    <a href="newlife.html" class="who-card">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">🌱</span>
+      <div class="who-title">
+        <span data-lang="en">Permit Approved — Starting Life</span>
+        <span data-lang="sv">Tillstånd godkänt — börja livet</span>
+        <span data-lang="ar">تمت الموافقة — بدء الحياة</span>
+        <span data-lang="uk">Дозвіл схвалено — початок життя</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Personnummer, BankID, FK, healthcare — in the right order</span>
+        <span data-lang="sv">Personnummer, BankID, FK, sjukvård — i rätt ordning</span>
+        <span data-lang="ar">الرقم الشخصي، BankID، الرعاية الصحية — بالترتيب الصحيح</span>
+        <span data-lang="uk">Personnummer, BankID, FK, охорона здоров'я — в правильному порядку</span>
+      </div>
+    </a>
+
+    <a href="agency.html" class="who-card agency">
+      <span class="who-arrow">→</span>
+      <span class="who-icon">⚖️</span>
+      <div class="who-title">
+        <span data-lang="en">Government Agency Staff</span>
+        <span data-lang="sv">Myndighetsanställd</span>
+        <span data-lang="ar">موظف الوكالة الحكومية</span>
+        <span data-lang="uk">Співробітник державної установи</span>
+      </div>
+      <div class="who-sub">
+        <span data-lang="en">Migrationsverket · Skatteverket · FK · AF · Säpo</span>
+        <span data-lang="sv">Migrationsverket · Skatteverket · FK · AF · Säpo</span>
+        <span data-lang="ar">ميغراتيونسفيركيت · سكاتيفيركيت · وغيرها</span>
+        <span data-lang="uk">Міграційне агентство · Податкова служба · інші</span>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn active">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+</body>
+</html>

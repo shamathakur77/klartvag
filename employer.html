@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employer / HR — Klartväg</title>
+<meta name="description" content="Category checker, SNI risk assessment, permit expiry tracker and document checklist for HR teams hiring in Sweden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+<div class="law-banner">
+  <span class="law-banner-tag"><span data-lang="en">Law changing</span><span data-lang="sv">Lag ändras</span><span data-lang="ar">تغيير قانوني</span><span data-lang="uk">Зміна закону</span></span>
+  <span data-lang="en"><strong>Major reform enters force 1 June 2026.</strong> Salary threshold rising to ~SEK 33,390/month. <a href="reform.html">What this means for your permits →</a></span>
+  <span data-lang="sv"><strong>Stor reform träder i kraft 1 juni 2026.</strong> <a href="reform.html">Vad det innebär →</a></span>
+  <span data-lang="ar"><strong>إصلاح كبير في 1 يونيو 2026.</strong> <a href="reform.html">ما يعنيه هذا ←</a></span>
+  <span data-lang="uk"><strong>Реформа 1 червня 2026.</strong> <a href="reform.html">Що це означає →</a></span>
+</div>
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Employer / HR</span><span data-lang="sv">Arbetsgivare / HR</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">
+        <span data-lang="en">Home</span><span data-lang="sv">Hem</span>
+      </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">
+        <span data-lang="en">Employer / HR</span><span data-lang="sv">Arbetsgivare / HR</span>
+      </span>
+    </div>
+
+    <!-- TOOL SELECTOR -->
+    <div class="situation-block">
+      <h2>
+        <span data-lang="en">What do you need right now?</span>
+        <span data-lang="sv">Vad behöver du just nu?</span>
+      </h2>
+      <div class="sv-label">
+        <span data-lang="en">Three tools. Each solves a distinct HR problem with official data only.</span>
+        <span data-lang="sv">Tre verktyg. Var och en löser ett specifikt HR-problem med enbart officiella data.</span>
+      </div>
+      <div class="option-chips" style="margin-top:16px">
+        <div class="chip selected" onclick="showEmployerTool('cat-checker', this)">
+          <span data-lang="en">Category checker — will my hire get the 30-day fast track?</span>
+          <span data-lang="sv">Kategorikontroll — får min anställd snabbspåret på 30 dagar?</span>
+        </div>
+        <div class="chip" onclick="showEmployerTool('expiry-tracker', this)">
+          <span data-lang="en">Permit expiry tracker — who on my team needs renewal soon?</span>
+          <span data-lang="sv">Tillståndsutgångspårare — vem behöver förnya snart?</span>
+        </div>
+        <div class="chip" onclick="showEmployerTool('doc-checklist', this)">
+          <span data-lang="en">Application checklist — what documents do I need to submit?</span>
+          <span data-lang="sv">Ansökningschecklista — vilka dokument behöver jag lämna in?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TOOL 1: CATEGORY CHECKER ── -->
+    <div id="tool-cat-checker">
+
+      <div class="situation-block">
+        <h2>
+          <span data-lang="en">Category checker</span>
+          <span data-lang="sv">Kategorikontroll</span>
+        </h2>
+        <div class="sv-label">
+          <span data-lang="en">Answer 3 questions. The category determines your processing time. All logic sourced directly from Migrationsverket rules.</span>
+          <span data-lang="sv">Svara på 3 frågor. Kategorin avgör din handläggningstid. All logik hämtad direkt från Migrationsverkets regler.</span>
+        </div>
+
+        <div class="official-source" style="margin-top:12px; margin-bottom:20px">
+          <div class="official-source-label">Official Source — Migrationsverket</div>
+          <a href="https://www.migrationsverket.se/en/employers/how-it-works.html" target="_blank">migrationsverket.se → Employers → How it works (four-category system)</a>
+          <div class="last-checked">Last checked: March 2026</div>
+        </div>
+
+        <div class="question-row">
+          <span class="question-label">
+            <span data-lang="en">Has your company been registered and active in Sweden for more than 12 months?</span>
+            <span data-lang="sv">Har ditt företag varit registrerat och aktivt i Sverige i mer än 12 månader?</span>
+            <span class="sv"><span data-lang="en">(Check at Bolagsverket.se with your org. number)</span><span data-lang="sv">(Kontrollera på Bolagsverket.se med ditt org.nr)</span></span>
+          </span>
+          <div class="option-chips">
+            <div class="chip" onclick="selectChip(this,'eq1','yes')">
+              <span data-lang="en">Yes — 12+ months active</span><span data-lang="sv">Ja — 12+ månader aktiv</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq1','no')">
+              <span data-lang="en">No — less than 12 months, or dormant</span><span data-lang="sv">Nej — mindre än 12 månader, eller vilande</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-row">
+          <span class="question-label">
+            <span data-lang="en">What is your company's SNI industry code? (First 2–3 digits are enough)</span>
+            <span data-lang="sv">Vad är ditt företags SNI-kod? (Första 2–3 siffrorna räcker)</span>
+            <span class="sv"><span data-lang="en">(Find it on your Skatteverket registration certificate, or at Bolagsverket.se)</span><span data-lang="sv">(Finn den på ditt Skatteverket-registreringsbevis)</span></span>
+          </span>
+          <div class="option-chips" style="flex-direction:column; align-items:flex-start; gap:6px">
+            <div class="chip" onclick="selectChip(this,'eq2','safe')">
+              <span data-lang="en">IT / Software / Tech (SNI 58–63)</span><span data-lang="sv">IT / Mjukvara / Teknik (SNI 58–63)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','safe')">
+              <span data-lang="en">Finance / Insurance / Consulting (SNI 64–74)</span><span data-lang="sv">Finans / Försäkring / Konsult (SNI 64–74)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','safe')">
+              <span data-lang="en">Healthcare / Education / Research (SNI 72, 85–86)</span><span data-lang="sv">Sjukvård / Utbildning / Forskning (SNI 72, 85–86)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','safe')">
+              <span data-lang="en">Manufacturing / Engineering (SNI 10–33)</span><span data-lang="sv">Tillverkning / Ingenjörsvetenskap (SNI 10–33)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Cleaning (SNI 81290, 81210)</span><span data-lang="sv">⚠ Städning (SNI 81290, 81210)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Hotel / Restaurant (SNI 55101, 56)</span><span data-lang="sv">⚠ Hotell / Restaurang (SNI 55101, 56)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Construction (SNI 41200, 421, 42990, 43)</span><span data-lang="sv">⚠ Bygg (SNI 41200, 421, 42990, 43)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Staffing / EOR agency (SNI 782)</span><span data-lang="sv">⚠ Bemanningsföretag (SNI 782)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Retail / Trading (SNI 471–478)</span><span data-lang="sv">⚠ Handel (SNI 471–478)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Personal assistance / Care (SNI 88101, 88102)</span><span data-lang="sv">⚠ Personlig assistans / Vård (SNI 88101, 88102)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Agriculture / Forestry (SNI 0113, 012, 02102)</span><span data-lang="sv">⚠ Jordbruk / Skogsbruk (SNI 0113, 012, 02102)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','risk')">
+              <span data-lang="en">⚠ Automobile repair (SNI 452)</span><span data-lang="sv">⚠ Bilreparation (SNI 452)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq2','unsure')">
+              <span data-lang="en">I don't know my SNI code yet</span><span data-lang="sv">Jag vet inte min SNI-kod ännu</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="question-row">
+          <span class="question-label">
+            <span data-lang="en">What is the role type you are hiring for?</span>
+            <span data-lang="sv">Vilken typ av roll anställer du för?</span>
+            <span class="sv"><span data-lang="en">(SSYK occupation code starting with 1, 2 or 3 = manager or higher education required)</span><span data-lang="sv">(SSYK-kod som börjar med 1, 2 eller 3 = chef eller kräver högre utbildning)</span></span>
+          </span>
+          <div class="option-chips">
+            <div class="chip" onclick="selectChip(this,'eq3','qualified')">
+              <span data-lang="en">Manager / role requiring higher education (SSYK starts 1, 2, or 3)</span>
+              <span data-lang="sv">Chef / roll som kräver högre utbildning (SSYK börjar 1, 2 eller 3)</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq3','special')">
+              <span data-lang="en">EU Blue Card / ICT transfer / Researcher / Artist / Athlete</span>
+              <span data-lang="sv">EU Blue Card / ICT-överföring / Forskare / Konstnär / Idrottare</span>
+            </div>
+            <div class="chip" onclick="selectChip(this,'eq3','other')">
+              <span data-lang="en">Skilled trade / other role not requiring higher education</span>
+              <span data-lang="sv">Yrkesarbetare / annan roll som inte kräver högre utbildning</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="find-path-btn" id="emp-find-btn" onclick="showCategoryResult()" disabled>
+          <span data-lang="en">Show my category →</span>
+          <span data-lang="sv">Visa min kategori →</span>
+        </button>
+      </div>
+
+      <!-- CATEGORY RESULT -->
+      <div id="cat-result" style="display:none">
+        <div id="cat-result-inner"></div>
+
+        <!-- WHAT HAPPENS NEXT -->
+        <div class="steps-container" style="margin-top:0">
+
+          <div class="step-card" id="emp-s1">
+            <div class="step-header" onclick="toggleStep('emp-s1')">
+              <div class="step-num" style="background:#006AA7">01</div>
+              <div class="step-agency-tag">
+                <div class="step-agency-name">Migrationsverket</div>
+                <div class="step-title-main">
+                  <span data-lang="en">Employer starts the application in e-service</span>
+                  <span data-lang="sv">Arbetsgivaren startar ansökan i e-tjänsten</span>
+                </div>
+              </div>
+              <div class="step-status">
+                <div class="status-dot required"></div>
+                <div class="status-text" style="color:#7a1a1a">
+                  <span data-lang="en">You go first</span><span data-lang="sv">Du går först</span>
+                </div>
+              </div>
+              <div class="step-chevron">›</div>
+            </div>
+            <div class="step-body">
+              <div class="official-source">
+                <div class="official-source-label">Official Source — Migrationsverket e-service</div>
+                <a href="https://www.migrationsverket.se/en/employers/applying-for-a-work-permit/how-to-apply-for-a-work-permit.html" target="_blank">migrationsverket.se → Employers → How to apply for a work permit</a>
+                <div class="last-checked">Last checked: March 2026</div>
+              </div>
+              <div class="plain-language">
+                <div class="plain-language-label">Plain language</div>
+                <p>
+                  <span data-lang="en">Log in to Migrationsverket's e-service with BankID or e-legitimation. Fill in: the job offer details, salary (must meet the collective agreement minimum or SEK 29,680/month threshold), working hours, duties, and your company's SNI code. The system will automatically route the application to the correct category.</span>
+                  <span data-lang="sv">Logga in på Migrationsverkets e-tjänst med BankID. Fyll i: jobbdetaljer, lön (måste uppfylla kollektivavtalets minimum eller tröskel på 29 680 kr/mån), arbetstid, arbetsuppgifter och ditt företags SNI-kod.</span>
+                </p>
+                <p>
+                  <span data-lang="en">You must also obtain a statement from the relevant trade union — even if your company has no collective agreement. This is mandatory. Contact the union that organises workers in your sector before submitting.</span>
+                  <span data-lang="sv">Du måste också inhämta ett yttrande från relevant fackförbund — även om ditt företag inte har kollektivavtal. Detta är obligatoriskt.</span>
+                </p>
+                <div class="plain-language-disclaimer">Simplified. Verify current requirements at the official Migrationsverket link above.</div>
+              </div>
+              <ul class="checklist">
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Job title and SSYK occupation code (3 digits minimum)</span><span data-lang="sv">Jobbtitel och SSYK-yrkeskod (minst 3 siffror)</span></span><span class="check-required">REQUIRED</span></li>
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Monthly salary — at least SEK 29,680 (verify current threshold at SCB.se before submitting)</span><span data-lang="sv">Månadslön — minst 29 680 kr (verifiera aktuell tröskel på SCB.se)</span></span><span class="check-required">REQUIRED</span></li>
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Insurance confirmation — health, life, occupational injury, pension from day one</span><span data-lang="sv">Försäkringsbekräftelse — hälsa, liv, arbetsskada, pension från dag ett</span></span><span class="check-required">REQUIRED</span></li>
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Trade union statement from the relevant union for your sector</span><span data-lang="sv">Fackligt yttrande från relevant fackförbund för din sektor</span></span><span class="check-required">REQUIRED</span></li>
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Company SNI code — from your Skatteverket registration certificate</span><span data-lang="sv">Företagets SNI-kod — från ditt Skatteverket-registreringsbevis</span></span><span class="check-required">REQUIRED</span></li>
+                <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">If company under 12 months old: proof of ability to pay salary for 3 months (balance sheet + available funds)</span><span data-lang="sv">Om företaget är under 12 månader gammalt: bevis på förmåga att betala lön i 3 månader</span></span><span class="check-required">IF APPLICABLE</span></li>
+              </ul>
+              <div class="unknown-box" style="margin-top:12px">
+                <div class="unknown-label">
+                  <span data-lang="en">Which trade union to contact — outside scope of this tool</span>
+                  <span data-lang="sv">Vilket fackförbund att kontakta — utanför det här verktygets räckvidd</span>
+                </div>
+                <p>
+                  <span data-lang="en">The correct union depends on your sector and the employee's occupation. Klartväg cannot determine this. Check at Saco.se, LO.se, or TCO.se, or contact Migrationsverket directly at 0771-235 235.</span>
+                  <span data-lang="sv">Rätt fackförbund beror på din sektor. Klartväg kan inte avgöra detta. Kontrollera på Saco.se, LO.se eller TCO.se.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card" id="emp-s2">
+            <div class="step-header" onclick="toggleStep('emp-s2')">
+              <div class="step-num" style="background:#006AA7">02</div>
+              <div class="step-agency-tag">
+                <div class="step-agency-name">Migrationsverket</div>
+                <div class="step-title-main">
+                  <span data-lang="en">Employee completes their part of the application</span>
+                  <span data-lang="sv">Den anställde fyller i sin del av ansökan</span>
+                </div>
+              </div>
+              <div class="step-status">
+                <div class="status-dot required"></div>
+                <div class="status-text" style="color:#7a1a1a">
+                  <span data-lang="en">After you submit</span><span data-lang="sv">Efter att du skickat in</span>
+                </div>
+              </div>
+              <div class="step-chevron">›</div>
+            </div>
+            <div class="step-body">
+              <div class="plain-language">
+                <div class="plain-language-label">Plain language</div>
+                <p>
+                  <span data-lang="en">After you submit the employer part, the employee receives a reference number and must complete their section: personal details, passport upload, and any additional documents. The 30-day clock starts only when BOTH parts are submitted and the application is complete. An incomplete application does not qualify for the fast track.</span>
+                  <span data-lang="sv">Efter att du har lämnat in arbetsgivardelen får den anställde ett referensnummer och måste fylla i sin del. 30-dagarsklockan startar bara när BÅDA delarna är inlämnade och ansökan är komplett.</span>
+                </p>
+                <div class="plain-language-disclaimer">Simplified. Verify at official source above.</div>
+              </div>
+              <div class="highlight-note">
+                <span data-lang="en">40% of applications are rejected or delayed due to missing documents — almost always preventable. The most common errors: salary below threshold, missing trade union statement, wrong SSYK code, employer insurance not confirmed. Use the checklist in Step 1 before submitting.</span>
+                <span data-lang="sv">40 % av ansökningarna avvisas eller försenas på grund av saknade handlingar — nästan alltid förebyggbart. Vanligaste felen: lön under tröskeln, saknat fackyttrande, fel SSYK-kod, försäkring ej bekräftad.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card" id="emp-s3">
+            <div class="step-header" onclick="toggleStep('emp-s3')">
+              <div class="step-num" style="background:#1a5c3a">03</div>
+              <div class="step-agency-tag">
+                <div class="step-agency-name">Migrationsverket</div>
+                <div class="step-title-main">
+                  <span data-lang="en">Decision received — next actions for HR</span>
+                  <span data-lang="sv">Beslut mottaget — nästa steg för HR</span>
+                </div>
+              </div>
+              <div class="step-status">
+                <div class="status-dot info"></div>
+                <div class="status-text" style="color:#1a4a7a">
+                  <span data-lang="en">After decision</span><span data-lang="sv">Efter beslut</span>
+                </div>
+              </div>
+              <div class="step-chevron">›</div>
+            </div>
+            <div class="step-body">
+              <div class="plain-language">
+                <div class="plain-language-label">Plain language</div>
+                <p>
+                  <span data-lang="en">Once approved, the employee must collect their physical permit card before entering Sweden (if outside) or at a Migrationsverket office if already here. They cannot start work before the card is in hand — not on approval notification alone.</span>
+                  <span data-lang="sv">När tillståndet godkänts måste den anställde hämta sitt fysiska tillståndskort innan de reser till Sverige (om de är utomlands) eller på ett Migrationsverket-kontor om de redan är här. De kan inte börja arbeta förrän kortet är i handen.</span>
+                </p>
+                <div class="plain-language-disclaimer">Verify current procedure at migrationsverket.se.</div>
+              </div>
+              <div class="handoff-box">
+                <div class="handoff-arrow">⚠️</div>
+                <div class="handoff-content">
+                  <div class="handoff-label">
+                    <span data-lang="en">Job change or promotion = new permit required</span>
+                    <span data-lang="sv">Jobbbyte eller befordran = nytt tillstånd krävs</span>
+                  </div>
+                  <div class="handoff-text">
+                    <span data-lang="en">If the employee changes role, employer, or gets promoted to a significantly different position, a new work permit application is required. The existing permit is tied to the specific role and employer. Government has proposed changes to this rule (June 2025) — check government.se for current status before assuming this applies.</span>
+                    <span data-lang="sv">Om den anställde byter roll, arbetsgivare eller befordras till en väsentligt annorlunda befattning krävs en ny arbetstillståndsansökan. Regeringen har föreslagit ändringar av denna regel (juni 2025) — kontrollera government.se för aktuell status.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="official-source" style="margin-top:12px">
+                <div class="official-source-label">Official Source — proposed rule change</div>
+                <a href="https://www.government.se/opinion-pieces/2025/07/sweden-cant-wait-for-talent/" target="_blank">government.se → "Sweden can't wait for talent" — June 2025 reform proposals</a>
+                <div class="last-checked">Last checked: March 2026 — verify current legislative status</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TOOL 2: PERMIT EXPIRY TRACKER ── -->
+    <div id="tool-expiry-tracker" style="display:none">
+      <div class="situation-block">
+        <h2>
+          <span data-lang="en">Permit expiry tracker</span>
+          <span data-lang="sv">Tillståndsutgångspårare</span>
+        </h2>
+        <div class="sv-label">
+          <span data-lang="en">Enter your team members' permit details. The tool flags who needs renewal action and when — based on official processing time targets only.</span>
+          <span data-lang="sv">Ange dina teammedlemmars tillståndsuppgifter. Verktyget flaggar vem som behöver förnyelse och när.</span>
+        </div>
+
+        <div class="outdated-warning" style="margin-top:0; margin-bottom:16px">
+          <span class="warn-icon">⚠</span>
+          <p>
+            <span data-lang="en">This tool uses official target processing times as the basis for renewal reminders. Actual processing times vary. Always submit renewal applications well before the expiry date. Migrationsverket processing time stats: migrationsverket.se/en/contact-us/waiting-times.html</span>
+            <span data-lang="sv">Det här verktyget använder officiella målhandläggningstider som grund. Faktiska handläggningstider varierar. Lämna alltid in förnyelseansökningar i god tid.</span>
+          </p>
+        </div>
+
+        <div id="tracker-entries">
+          <div class="tracker-row" id="tracker-0" style="display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:8px; margin-bottom:8px; align-items:end">
+            <div>
+              <div class="question-label" style="font-size:11px; margin-bottom:4px">
+                <span data-lang="en">Employee name</span><span data-lang="sv">Anställds namn</span>
+              </div>
+              <input type="text" placeholder="e.g. Priya Sharma" style="width:100%; padding:8px 10px; border:1px solid var(--border2); background:white; font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink)">
+            </div>
+            <div>
+              <div class="question-label" style="font-size:11px; margin-bottom:4px">
+                <span data-lang="en">Permit type</span><span data-lang="sv">Tillståndstyp</span>
+              </div>
+              <select style="width:100%; padding:8px 10px; border:1px solid var(--border2); background:white; font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink)">
+                <option>Category A (highly qualified)</option>
+                <option>Category B (Blue Card / ICT / researcher)</option>
+                <option>Category C (skilled, non-high-risk industry)</option>
+                <option>Category D (high-scrutiny industry)</option>
+              </select>
+            </div>
+            <div>
+              <div class="question-label" style="font-size:11px; margin-bottom:4px">
+                <span data-lang="en">Permit expiry date</span><span data-lang="sv">Tillståndets utgångsdatum</span>
+              </div>
+              <input type="date" style="width:100%; padding:8px 10px; border:1px solid var(--border2); background:white; font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink)">
+            </div>
+            <div style="padding-bottom:2px">
+              <button onclick="calculateExpiry(this)" style="background:var(--swedish-blue); color:white; border:none; padding:9px 14px; cursor:pointer; font-family:'IBM Plex Sans',sans-serif; font-size:12px; white-space:nowrap">
+                <span data-lang="en">Check →</span><span data-lang="sv">Kontrollera →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="addTrackerRow()" style="background:none; border:1px dashed var(--border2); color:var(--ink3); padding:8px 16px; cursor:pointer; font-size:12px; font-family:'IBM Plex Sans',sans-serif; margin-top:4px">
+          + <span data-lang="en">Add another employee</span><span data-lang="sv">Lägg till fler anställda</span>
+        </button>
+
+        <div id="expiry-results" style="margin-top:20px"></div>
+
+        <div class="unknown-box" style="margin-top:16px">
+          <div class="unknown-label">
+            <span data-lang="en">What this tool cannot do</span>
+            <span data-lang="sv">Vad det här verktyget inte kan göra</span>
+          </div>
+          <p>
+            <span data-lang="en">This tool cannot access Migrationsverket's live queue data. It cannot guarantee your actual renewal processing time. It does not send automatic email reminders (prototype limitation). For live processing times, always check: migrationsverket.se/en/contact-us/waiting-times.html</span>
+            <span data-lang="sv">Det här verktyget kan inte komma åt Migrationsverkets livekö. Det kan inte garantera din faktiska handläggningstid. Kontrollera alltid: migrationsverket.se.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TOOL 3: DOCUMENT CHECKLIST ── -->
+    <div id="tool-doc-checklist" style="display:none">
+      <div class="situation-block">
+        <h2>
+          <span data-lang="en">Application document checklist</span>
+          <span data-lang="sv">Checklista för ansökningshandlingar</span>
+        </h2>
+        <div class="sv-label">
+          <span data-lang="en">Official requirements from Migrationsverket form 232511 (Information about the employment). Select your situation.</span>
+          <span data-lang="sv">Officiella krav från Migrationsverkets blankett 232511. Välj din situation.</span>
+        </div>
+        <div class="official-source" style="margin-top:12px; margin-bottom:16px">
+          <div class="official-source-label">Official Source — Migrationsverket form 232511</div>
+          <a href="https://www.migrationsverket.se/download/18.2cd2e409193b84c506a35a2e/1738233231551/232511_Info_anst_en.pdf" target="_blank">migrationsverket.se → Form 232511 — Information about the employment (PDF)</a>
+          <div class="last-checked">Last checked: March 2026</div>
+        </div>
+        <div class="option-chips" style="margin-bottom:20px">
+          <div class="chip selected" onclick="selectChip(this,'dq1','standard'); showDocList('standard')">
+            <span data-lang="en">Standard employer (12+ months, not high-risk industry)</span>
+            <span data-lang="sv">Standard arbetsgivare (12+ månader, ej högriskbransch)</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'dq1','new'); showDocList('new')">
+            <span data-lang="en">New or dormant company (under 12 months / was inactive)</span>
+            <span data-lang="sv">Nytt eller vilande företag (under 12 månader / var inaktivt)</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'dq1','highrisk'); showDocList('highrisk')">
+            <span data-lang="en">High-scrutiny industry (Category D — cleaning, construction, hospitality, etc.)</span>
+            <span data-lang="sv">Högriskbransch (Kategori D — städning, bygg, restaurang, etc.)</span>
+          </div>
+        </div>
+
+        <div id="doclist-standard">
+          <div class="section-label">
+            <span data-lang="en">Required documents — standard employer</span>
+            <span data-lang="sv">Obligatoriska handlingar — standard arbetsgivare</span>
+          </div>
+          <ul class="checklist">
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Completed form 232511 (Information about the employment) — filled in e-service or PDF</span><span data-lang="sv">Ifylld blankett 232511 (Uppgifter om anställningen)</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Trade union statement — from the union organising workers in your occupation sector</span><span data-lang="sv">Fackligt yttrande — från förbundet som organiserar arbetstagare inom din sektor</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Confirmation of insurance coverage: health, life, occupational injury, pension — effective from day one of employment</span><span data-lang="sv">Bekräftelse av försäkringsskydd: hälsa, liv, arbetsskada, pension — från dag ett</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Company's SNI code — from Skatteverket registration certificate</span><span data-lang="sv">Företagets SNI-kod — från Skatteverkets registreringsbevis</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Salary and employment terms matching collective agreement or industry norms</span><span data-lang="sv">Lön och anställningsvillkor som matchar kollektivavtal eller branschnormer</span></span><span class="check-required">REQUIRED</span></li>
+          </ul>
+        </div>
+
+        <div id="doclist-new" style="display:none">
+          <div class="section-label">
+            <span data-lang="en">Required documents — new / dormant company (additional requirements)</span>
+            <span data-lang="sv">Obligatoriska handlingar — nytt / vilande företag (ytterligare krav)</span>
+          </div>
+          <ul class="checklist">
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">All standard documents above</span><span data-lang="sv">Alla standarddokument ovan</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Opening balance sheet OR profit-and-loss statement (replacing annual accounts if not yet available)</span><span data-lang="sv">Ingående balansräkning ELLER resultaträkning (ersätter årsredovisning om ej tillgänglig)</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Proof of available funds or overdraft credit sufficient to cover 3 months' salary</span><span data-lang="sv">Bevis på tillgängliga medel eller checkkredit för att täcka 3 månaders lön</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Brief description of recurring needs to employ non-EU workers and reason for international recruitment</span><span data-lang="sv">Kort beskrivning av återkommande behov att anställa utomeuropeiska arbetstagare</span></span><span class="check-required">REQUIRED</span></li>
+          </ul>
+          <div class="outdated-warning" style="margin-top:8px">
+            <span class="warn-icon">⚠</span>
+            <p>
+              <span data-lang="en">Companies under 12 months old cannot access Category A (30-day fast track). Applications automatically route to Category D with processing times potentially exceeding 120 days.</span>
+              <span data-lang="sv">Företag under 12 månader kan inte använda Kategori A (30-dagars snabbspår). Ansökningar dirigeras automatiskt till Kategori D.</span>
+            </p>
+          </div>
+        </div>
+
+        <div id="doclist-highrisk" style="display:none">
+          <div class="section-label">
+            <span data-lang="en">Required documents — high-scrutiny industry (Category D)</span>
+            <span data-lang="sv">Obligatoriska handlingar — högriskbransch (Kategori D)</span>
+          </div>
+          <ul class="checklist">
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">All standard documents above</span><span data-lang="sv">Alla standarddokument ovan</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Detailed description of how you will finance the salary for at least 3 months</span><span data-lang="sv">Detaljerad beskrivning av hur du finansierar lönen i minst 3 månader</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Balance sheet and performance report for current financial year</span><span data-lang="sv">Balansräkning och resultaträkning för innevarande räkenskapsår</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">Available funds or overdraft credit documentation</span><span data-lang="sv">Dokumentation av tillgängliga medel eller checkkredit</span></span><span class="check-required">REQUIRED</span></li>
+            <li><div class="check-box" onclick="this.classList.toggle('checked')"></div><span><span data-lang="en">If previously employed non-EU workers: proof of employer contributions paid and correct insurance coverage</span><span data-lang="sv">Om du tidigare anställt utomeuropeiska arbetstagare: bevis på betalda arbetsgivaravgifter och korrekt försäkringsskydd</span></span><span class="check-required">IF APPLICABLE</span></li>
+          </ul>
+          <div class="outdated-warning" style="margin-top:8px">
+            <span class="warn-icon">⚠</span>
+            <p>
+              <span data-lang="en">Category D processing times are not guaranteed. Migrationsverket states they may exceed 120 days. Municipal, regional, and state employers with 50+ employees are exempt from enhanced requirements even in these sectors.</span>
+              <span data-lang="sv">Kategori D-handläggningstider är inte garanterade och kan överstiga 120 dagar. Kommunala, regionala och statliga arbetsgivare med 50+ anställda är undantagna.</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn active">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script src="tools.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expat / Skilled Worker — Klartväg</title>
+<meta name="description" content="Sweden work permit guide. Category A fast track, document checklist, step-by-step process from job offer to personnummer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+<div class="law-banner">
+  <span class="law-banner-tag"><span data-lang="en">Law changing</span><span data-lang="sv">Lag ändras</span><span data-lang="ar">تغيير قانوني</span><span data-lang="uk">Зміна закону</span></span>
+  <span data-lang="en"><strong>Major reform enters force 1 June 2026.</strong> Salary threshold rising to ~SEK 33,390/month. <a href="reform.html">What this means for your permits →</a></span>
+  <span data-lang="sv"><strong>Stor reform träder i kraft 1 juni 2026.</strong> <a href="reform.html">Vad det innebär →</a></span>
+  <span data-lang="ar"><strong>إصلاح كبير في 1 يونيو 2026.</strong> <a href="reform.html">ما يعنيه هذا ←</a></span>
+  <span data-lang="uk"><strong>Реформа 1 червня 2026.</strong> <a href="reform.html">Що це означає →</a></span>
+</div>
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Expat / Skilled Worker</span><span data-lang="sv">Expat / Kvalificerad arbetstagare</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">
+        <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+      </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">
+        <span data-lang="en">Expat / Skilled Worker</span><span data-lang="sv">Expat / Kvalificerad arbetstagare</span><span data-lang="ar">مغترب / عامل ماهر</span><span data-lang="uk">Експат</span>
+      </span>
+    </div>
+
+    <div class="situation-block">
+      <h2>
+        <span data-lang="en">Tell us your situation</span>
+        <span data-lang="sv">Berätta om din situation</span>
+        <span data-lang="ar">أخبرنا عن وضعك</span>
+        <span data-lang="uk">Розкажіть про свою ситуацію</span>
+      </h2>
+      <div class="sv-label">
+        <span data-lang="en">3 questions. Your path is generated from official rules only.</span>
+        <span data-lang="sv">3 frågor. Din väg genereras från officiella regler.</span>
+        <span data-lang="ar">3 أسئلة. يتم إنشاء مسارك من القواعد الرسمية فقط.</span>
+        <span data-lang="uk">3 запитання. Ваш шлях формується лише з офіційних правил.</span>
+      </div>
+
+      <div class="question-row">
+        <span class="question-label">
+          <span data-lang="en">Where are you right now?</span>
+          <span data-lang="sv">Var befinner du dig just nu?</span>
+          <span data-lang="ar">أين أنت الآن؟</span>
+          <span data-lang="uk">Де ви зараз?</span>
+        </span>
+        <div class="option-chips">
+          <div class="chip" onclick="selectChip(this,'q1','outside')">
+            <span data-lang="en">Outside Sweden, job offer received</span>
+            <span data-lang="sv">Utanför Sverige, fått jobberbjudande</span>
+            <span data-lang="ar">خارج السويد، تلقيت عرض عمل</span>
+            <span data-lang="uk">За межами Швеції, отримано пропозицію роботи</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'q1','inside')">
+            <span data-lang="en">Already in Sweden, permit pending</span>
+            <span data-lang="sv">Redan i Sverige, tillstånd väntar</span>
+            <span data-lang="ar">بالفعل في السويد، التصريح قيد الانتظار</span>
+            <span data-lang="uk">Вже в Швеції, дозвіл на розгляді</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'q1','extension')">
+            <span data-lang="en">Permit expires soon — need extension</span>
+            <span data-lang="sv">Tillståndet löper ut snart</span>
+            <span data-lang="ar">التصريح ينتهي قريباً</span>
+            <span data-lang="uk">Дозвіл закінчується — потрібне продовження</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-row">
+        <span class="question-label">
+          <span data-lang="en">What is your role type?</span>
+          <span data-lang="sv">Vilken typ av roll har du?</span>
+          <span data-lang="ar">ما نوع دورك؟</span>
+          <span data-lang="uk">Який тип вашої посади?</span>
+        </span>
+        <div class="option-chips">
+          <div class="chip" onclick="selectChip(this,'q2','catA')">
+            <span data-lang="en">Manager / Higher education required</span>
+            <span data-lang="sv">Chef / Kräver högre utbildning</span>
+            <span data-lang="ar">مدير / يتطلب تعليماً عالياً</span>
+            <span data-lang="uk">Менеджер / Вища освіта обов'язкова</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'q2','researcher')">
+            <span data-lang="en">Researcher / PhD student</span>
+            <span data-lang="sv">Forskare / Doktorand</span>
+            <span data-lang="ar">باحث / طالب دكتوراه</span>
+            <span data-lang="uk">Дослідник / Аспірант</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'q2','skilled')">
+            <span data-lang="en">Skilled trade / Technical role</span>
+            <span data-lang="sv">Yrkesarbetare / Teknisk roll</span>
+            <span data-lang="ar">تجارة ماهرة / دور تقني</span>
+            <span data-lang="uk">Кваліфікований спеціаліст</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="question-row">
+        <span class="question-label">
+          <span data-lang="en">Is your employer registered in Sweden for more than 12 months?</span>
+          <span data-lang="sv">Är din arbetsgivare registrerad i Sverige sedan mer än 12 månader?</span>
+          <span data-lang="ar">هل تأسس صاحب عملك في السويد منذ أكثر من 12 شهراً؟</span>
+          <span data-lang="uk">Чи зареєстрований ваш роботодавець у Швеції понад 12 місяців?</span>
+        </span>
+        <div class="option-chips">
+          <div class="chip" onclick="selectChip(this,'q3','yes')">
+            <span data-lang="en">Yes</span><span data-lang="sv">Ja</span><span data-lang="ar">نعم</span><span data-lang="uk">Так</span>
+          </div>
+          <div class="chip" onclick="selectChip(this,'q3','no')">
+            <span data-lang="en">No / Not sure</span><span data-lang="sv">Nej / Vet inte</span><span data-lang="ar">لا / غير متأكد</span><span data-lang="uk">Ні / Не впевнений</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="find-path-btn" id="find-btn" onclick="showExpatPath()" disabled>
+        <span data-lang="en">Show my path →</span>
+        <span data-lang="sv">Visa min väg →</span>
+        <span data-lang="ar">أظهر مساري ←</span>
+        <span data-lang="uk">Показати мій шлях →</span>
+      </button>
+    </div>
+
+    <!-- PATH RESULT -->
+    <div class="path-result" id="expat-path" style="display:none">
+
+      <div class="your-path-header">
+        <h2>
+          <span data-lang="en">Your path: Category A Work Permit</span>
+          <span data-lang="sv">Din väg: Kategori A Arbetstillstånd</span>
+          <span data-lang="ar">مسارك: تصريح عمل الفئة أ</span>
+          <span data-lang="uk">Ваш шлях: Дозвіл на роботу Категорії A</span>
+        </h2>
+        <div class="path-meta">
+          <span data-lang="en">Target: 30 days · 4 steps · 3 agencies</span>
+          <span data-lang="sv">Mål: 30 dagar · 4 steg · 3 myndigheter</span>
+          <span data-lang="ar">الهدف: 30 يوماً · 4 خطوات · 3 وكالات</span>
+          <span data-lang="uk">Ціль: 30 днів · 4 кроки · 3 агентства</span>
+        </div>
+      </div>
+
+      <div class="steps-container">
+
+        <!-- STEP 1 -->
+        <div class="step-card" id="s1">
+          <div class="step-header" onclick="toggleStep('s1')">
+            <div class="step-num" style="background:#006AA7">01</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Migrationsverket</div>
+              <div class="step-title-main">
+                <span data-lang="en">Verify your application category</span>
+                <span data-lang="sv">Verifiera din ansökningskategori</span>
+                <span data-lang="ar">تحقق من فئة طلبك</span>
+                <span data-lang="uk">Перевірте категорію вашої заяви</span>
+              </div>
+            </div>
+            <div class="step-status">
+              <div class="status-dot required"></div>
+              <div class="status-text" style="color:#7a1a1a">
+                <span data-lang="en">Required</span><span data-lang="sv">Obligatoriskt</span><span data-lang="ar">مطلوب</span><span data-lang="uk">Обов'язково</span>
+              </div>
+            </div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+            <div class="official-source">
+              <div class="official-source-label">
+                <span data-lang="en">Official Source — Migrationsverket</span>
+                <span data-lang="sv">Officiell källa — Migrationsverket</span>
+                <span data-lang="ar">المصدر الرسمي — ميغراتيونسفيركيت</span>
+                <span data-lang="uk">Офіційне джерело — Міграційне агентство</span>
+              </div>
+              <a href="https://www.migrationsverket.se/en/employers/highly-qualified-workers/if-you-are-employing-highly-qualified-workers.html" target="_blank">
+                migrationsverket.se → Employers → Highly qualified workers
+              </a>
+              <div class="last-checked">
+                <span data-lang="en">Last checked: March 2026</span>
+                <span data-lang="sv">Senast kontrollerad: mars 2026</span>
+                <span data-lang="ar">آخر فحص: مارس 2026</span>
+                <span data-lang="uk">Остання перевірка: березень 2026</span>
+              </div>
+            </div>
+
+            <div class="plain-language">
+              <div class="plain-language-label">
+                <span data-lang="en">Plain language explanation</span>
+                <span data-lang="sv">Förklaring på klarspråk</span>
+                <span data-lang="ar">شرح بلغة بسيطة</span>
+                <span data-lang="uk">Пояснення простою мовою</span>
+              </div>
+              <p>
+                <span data-lang="en">Sweden sorts all work permit applications into 4 categories (A, B, C, D). Category A is the fast track — 30-day processing — for managers and roles requiring higher education. Your job title must match an SSYK occupation code starting with 1, 2, or 3. Your employer's industry code (SNI) must not appear on the high-risk list.</span>
+                <span data-lang="sv">Sverige sorterar alla arbetstillståndsansökningar i 4 kategorier (A, B, C, D). Kategori A är snabbspåret — 30 dagars handläggning — för chefer och roller som kräver högre utbildning.</span>
+                <span data-lang="ar">تفرز السويد جميع طلبات تصاريح العمل إلى 4 فئات (A، B، C، D). الفئة أ هي المسار السريع — معالجة 30 يوماً — للمديرين والأدوار التي تتطلب تعليماً عالياً.</span>
+                <span data-lang="uk">Швеція сортує всі заяви на дозвіл на роботу на 4 категорії (A, B, C, D). Категорія A — прискорений розгляд 30 днів — для менеджерів та посад, що вимагають вищої освіти.</span>
+              </p>
+              <div class="plain-language-disclaimer">
+                <span data-lang="en">This is a simplified explanation for guidance only. The legally binding text is on the official Migrationsverket page linked above.</span>
+                <span data-lang="sv">Detta är en förenklad förklaring. Den juridiskt bindande texten finns på den officiella Migrationsverket-sidan ovan.</span>
+                <span data-lang="ar">هذا شرح مبسط للتوجيه فقط. النص الملزم قانوناً موجود في الصفحة الرسمية أعلاه.</span>
+                <span data-lang="uk">Це спрощене пояснення лише для орієнтування. Юридично обов'язковий текст знаходиться на офіційній сторінці вище.</span>
+              </div>
+            </div>
+
+            <div class="section-label" style="margin-top:16px">
+              <span data-lang="en">What you need to confirm</span>
+              <span data-lang="sv">Vad du behöver bekräfta</span>
+              <span data-lang="ar">ما تحتاج إلى تأكيده</span>
+              <span data-lang="uk">Що вам потрібно підтвердити</span>
+            </div>
+            <ul class="checklist">
+              <li>
+                <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+                <span>
+                  <span data-lang="en">Your SSYK occupation code starts with 1, 2, or 3</span>
+                  <span data-lang="sv">Din SSYK-yrkeskod börjar med 1, 2 eller 3</span>
+                  <span data-lang="ar">رمز مهنة SSYK الخاص بك يبدأ بـ 1 أو 2 أو 3</span>
+                  <span data-lang="uk">Ваш код SSYK починається з 1, 2 або 3</span>
+                </span>
+                <span class="check-required">REQUIRED</span>
+              </li>
+              <li>
+                <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+                <span>
+                  <span data-lang="en">Monthly salary is at least SEK 29,680 (threshold June 2025 — verify current amount at SCB.se)</span>
+                  <span data-lang="sv">Månadslönen är minst 29 680 kr (tröskel juni 2025 — verifiera aktuellt belopp på SCB.se)</span>
+                  <span data-lang="ar">الراتب الشهري لا يقل عن 29,680 كرونة (تحقق من المبلغ الحالي في SCB.se)</span>
+                  <span data-lang="uk">Місячна зарплата не менше 29,680 SEK (перевірте поточну суму на SCB.se)</span>
+                </span>
+                <span class="check-required">REQUIRED</span>
+              </li>
+              <li>
+                <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+                <span>
+                  <span data-lang="en">Employer registered in Sweden for 12+ months (check at Bolagsverket.se)</span>
+                  <span data-lang="sv">Arbetsgivare registrerad i Sverige i 12+ månader (kontrollera på Bolagsverket.se)</span>
+                  <span data-lang="ar">صاحب العمل مسجل في السويد منذ أكثر من 12 شهراً</span>
+                  <span data-lang="uk">Роботодавець зареєстрований у Швеції понад 12 місяців</span>
+                </span>
+                <span class="check-required">REQUIRED</span>
+              </li>
+              <li>
+                <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+                <span>
+                  <span data-lang="en">Employer's SNI code is not in Category D (cleaning, construction, hospitality, personal assistance)</span>
+                  <span data-lang="sv">Arbetsgivarens SNI-kod finns inte i Kategori D</span>
+                  <span data-lang="ar">رمز SNI لصاحب العمل ليس في الفئة D</span>
+                  <span data-lang="uk">Код SNI роботодавця не відноситься до Категорії D</span>
+                </span>
+                <span class="check-required">REQUIRED</span>
+              </li>
+            </ul>
+
+            <div class="unknown-box mt16">
+              <div class="unknown-label">
+                <span data-lang="en">Outside scope of this tool</span>
+                <span data-lang="sv">Utanför det här verktygets räckvidd</span>
+                <span data-lang="ar">خارج نطاق هذه الأداة</span>
+                <span data-lang="uk">Поза межами цього інструменту</span>
+              </div>
+              <p>
+                <span data-lang="en">Whether your specific employer qualifies for Category A cannot be confirmed here. Migrationsverket makes this determination during processing. Check directly: migrationsverket.se or call 0771-235 235.</span>
+                <span data-lang="sv">Om just din arbetsgivare kvalificerar för Kategori A kan inte bekräftas här. Migrationsverket fattar detta beslut under handläggningen.</span>
+                <span data-lang="ar">لا يمكن تأكيد ما إذا كان صاحب عملك يستوفي شروط الفئة أ هنا. تتخذ ميغراتيونسفيركيت هذا القرار أثناء المعالجة.</span>
+                <span data-lang="uk">Чи відповідає ваш конкретний роботодавець вимогам Категорії A — тут підтвердити неможливо. Це визначає Міграційне агентство під час розгляду.</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-card" id="s2">
+          <div class="step-header" onclick="toggleStep('s2')">
+            <div class="step-num" style="background:#006AA7">02</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Migrationsverket</div>
+              <div class="step-title-main">
+                <span data-lang="en">Employer starts the application</span>
+                <span data-lang="sv">Arbetsgivaren startar ansökan</span>
+                <span data-lang="ar">يبدأ صاحب العمل الطلب</span>
+                <span data-lang="uk">Роботодавець розпочинає заяву</span>
+              </div>
+            </div>
+            <div class="step-status">
+              <div class="status-dot required"></div>
+              <div class="status-text" style="color:#7a1a1a">
+                <span data-lang="en">Required first</span><span data-lang="sv">Obligatoriskt först</span><span data-lang="ar">مطلوب أولاً</span><span data-lang="uk">Спочатку обов'язково</span>
+              </div>
+            </div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+            <div class="official-source">
+              <div class="official-source-label">Official Source — Migrationsverket e-service</div>
+              <a href="https://www.migrationsverket.se/en/employers/applying-for-a-work-permit/how-to-apply-for-a-work-permit.html" target="_blank">
+                migrationsverket.se → Employers → How to apply for a work permit
+              </a>
+              <div class="last-checked">Last checked: March 2026</div>
+            </div>
+
+            <div class="plain-language">
+              <div class="plain-language-label">
+                <span data-lang="en">Plain language explanation</span>
+                <span data-lang="sv">Förklaring på klarspråk</span>
+                <span data-lang="ar">شرح بسيط</span>
+                <span data-lang="uk">Просте пояснення</span>
+              </div>
+              <p>
+                <span data-lang="en">The employer must go first. They log in to Migrationsverket's e-service and enter details about the job offer — salary, hours, job duties. This creates a case reference number. Only then can you (the applicant) complete your part of the application.</span>
+                <span data-lang="sv">Arbetsgivaren måste gå först. De loggar in på Migrationsverkets e-tjänst och anger uppgifter om jobberbjudandet. Detta skapar ett ärendenummer. Först därefter kan du (sökanden) slutföra din del.</span>
+                <span data-lang="ar">يجب أن يذهب صاحب العمل أولاً. يقوم بتسجيل الدخول إلى الخدمة الإلكترونية وإدخال تفاصيل عرض العمل. هذا يُنشئ رقم مرجعي للحالة.</span>
+                <span data-lang="uk">Спочатку діє роботодавець. Він входить в електронну службу та вводить деталі пропозиції роботи. Це створює референс-номер справи. Лише після цього ви можете заповнити свою частину.</span>
+              </p>
+              <div class="plain-language-disclaimer">
+                <span data-lang="en">Simplified explanation only. Legally binding text at the official link above.</span>
+                <span data-lang="sv">Förenklad förklaring. Juridiskt bindande text i länken ovan.</span>
+                <span data-lang="ar">شرح مبسط فقط. النص الملزم في الرابط أعلاه.</span>
+                <span data-lang="uk">Лише спрощене пояснення. Юридично обов'язковий текст за посиланням вище.</span>
+              </div>
+            </div>
+
+            <div class="highlight-note">
+              <span data-lang="en">Critical: The application is ONLY counted as complete — and enters the 30-day fast track — when BOTH the employer AND applicant parts are submitted with all documents. Incomplete applications do not qualify for the 30-day timeline.</span>
+              <span data-lang="sv">Viktigt: Ansökan räknas som KOMPLETT — och går in i snabbspåret — bara när BÅDA arbetsgivarens och sökandens delar är inlämnade med alla dokument.</span>
+              <span data-lang="ar">مهم: تُحتسب الطلب كاملاً فقط عندما يتم تقديم كلا الجزأين — صاحب العمل والمتقدم — مع جميع الوثائق.</span>
+              <span data-lang="uk">Важливо: Заява вважається ПОВНОЮ лише тоді, коли обидві частини — роботодавця і заявника — подані з усіма документами.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: INTER-AGENCY HANDOFF -->
+        <div class="step-card" id="s3">
+          <div class="step-header" onclick="toggleStep('s3')">
+            <div class="step-num" style="background:#1a5c3a">03</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Migrationsverket → Skatteverket</div>
+              <div class="step-title-main">
+                <span data-lang="en">Permit approved — register for personnummer</span>
+                <span data-lang="sv">Tillstånd godkänt — registrera personnummer</span>
+                <span data-lang="ar">تمت الموافقة على التصريح — التسجيل للحصول على الرقم الشخصي</span>
+                <span data-lang="uk">Дозвіл схвалено — реєстрація personnummer</span>
+              </div>
+            </div>
+            <div class="step-status">
+              <div class="status-dot info"></div>
+              <div class="status-text" style="color:#1a4a7a">
+                <span data-lang="en">After approval</span><span data-lang="sv">Efter godkännande</span><span data-lang="ar">بعد الموافقة</span><span data-lang="uk">Після схвалення</span>
+              </div>
+            </div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+
+            <div class="handoff-box">
+              <div class="handoff-arrow">🔀</div>
+              <div class="handoff-content">
+                <div class="handoff-label">
+                  <span data-lang="en">Agency handoff: Migrationsverket → Skatteverket</span>
+                  <span data-lang="sv">Myndighetsbyte: Migrationsverket → Skatteverket</span>
+                  <span data-lang="ar">تحويل الوكالة: ميغراتيونسفيركيت ← سكاتيفيركيت</span>
+                  <span data-lang="uk">Передача між агентствами: Міграційне → Податкове</span>
+                </div>
+                <div class="handoff-text">
+                  <span data-lang="en">Once your permit arrives, your next stop is Skatteverket (Swedish Tax Agency). You must register your move to Sweden to receive a personnummer. This number unlocks everything: BankID, healthcare, lease agreements, government services.</span>
+                  <span data-lang="sv">När ditt tillstånd anländer är nästa stopp Skatteverket. Du måste registrera din flytt till Sverige för att få ett personnummer. Detta nummer låser upp allt: BankID, sjukvård, hyresavtal, samhällstjänster.</span>
+                  <span data-lang="ar">بمجرد وصول تصريحك، محطتك التالية هي سكاتيفيركيت. يجب عليك تسجيل انتقالك إلى السويد للحصول على رقم شخصي.</span>
+                  <span data-lang="uk">Після отримання дозволу ваш наступний крок — Skatteverket. Ви повинні зареєструватися для отримання personnummer. Цей номер відкриє доступ до всього: BankID, охорони здоров'я, договорів оренди.</span>
+                </div>
+                <button class="handoff-btn" onclick="window.location.href='newlife.html'">
+                  <span data-lang="en">Go to: After permit — next steps →</span>
+                  <span data-lang="sv">Gå till: Efter tillståndet — nästa steg →</span>
+                  <span data-lang="ar">اذهب إلى: بعد التصريح ←</span>
+                  <span data-lang="uk">Перейти до: Після дозволу →</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="official-source">
+              <div class="official-source-label">Official Source — Skatteverket</div>
+              <a href="https://www.skatteverket.se/privat/folkbokforing/nyanlandisverige.4.7be5268414bea064694f30.html" target="_blank">
+                skatteverket.se → Folkbokföring → Nyanlända i Sverige
+              </a>
+              <div class="last-checked">Last checked: March 2026</div>
+            </div>
+
+            <div class="unknown-box">
+              <div class="unknown-label">
+                <span data-lang="en">Processing time for personnummer</span>
+                <span data-lang="sv">Handläggningstid för personnummer</span>
+                <span data-lang="ar">وقت معالجة الرقم الشخصي</span>
+                <span data-lang="uk">Час обробки personnummer</span>
+              </div>
+              <p>
+                <span data-lang="en">Klartväg does not estimate how long your personnummer registration will take — this varies by municipality and volume. Check current times directly at Skatteverket.se or call 0771-567 567.</span>
+                <span data-lang="sv">Klartväg beräknar inte hur lång tid din personnummerregistrering tar — det varierar. Kontrollera hos Skatteverket.se eller ring 0771-567 567.</span>
+                <span data-lang="ar">لا يقدر كلارتفاغ الوقت اللازم لتسجيل رقمك الشخصي. تحقق مباشرة من Skatteverket.se.</span>
+                <span data-lang="uk">Klartväg не оцінює час реєстрації personnummer — він залежить від муніципалітету. Перевірте безпосередньо на Skatteverket.se.</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-card" id="s4">
+          <div class="step-header" onclick="toggleStep('s4')">
+            <div class="step-num" style="background:#5a3a8a">04</div>
+            <div class="step-agency-tag">
+              <div class="step-agency-name">Försäkringskassan</div>
+              <div class="step-title-main">
+                <span data-lang="en">Register for social insurance</span>
+                <span data-lang="sv">Anmäl dig till socialförsäkringen</span>
+                <span data-lang="ar">التسجيل في التأمين الاجتماعي</span>
+                <span data-lang="uk">Реєстрація соціального страхування</span>
+              </div>
+            </div>
+            <div class="step-status">
+              <div class="status-dot optional"></div>
+              <div class="status-text" style="color:#8a6a20">
+                <span data-lang="en">After personnummer</span><span data-lang="sv">Efter personnummer</span><span data-lang="ar">بعد الرقم الشخصي</span><span data-lang="uk">Після personnummer</span>
+              </div>
+            </div>
+            <div class="step-chevron">›</div>
+          </div>
+          <div class="step-body">
+
+            <div class="outdated-warning">
+              <span class="warn-icon">⚠</span>
+              <p>
+                <span data-lang="en">This page was last verified March 2026. Försäkringskassan eligibility rules for work permit holders may have changed. Always verify at the official source before acting.</span>
+                <span data-lang="sv">Den här sidan verifierades senast mars 2026. FK:s regler kan ha förändrats. Kontrollera alltid på den officiella källan.</span>
+                <span data-lang="ar">تم التحقق من هذه الصفحة آخر مرة في مارس 2026. قد تكون القواعد قد تغيرت.</span>
+                <span data-lang="uk">Ця сторінка перевірена в березні 2026. Правила FK могли змінитися. Завжди перевіряйте на офіційному джерелі.</span>
+              </p>
+            </div>
+
+            <div class="official-source">
+              <div class="official-source-label">Official Source — Försäkringskassan</div>
+              <a href="https://www.forsakringskassan.se/english/new-in-sweden" target="_blank">
+                forsakringskassan.se/english → New in Sweden
+              </a>
+              <div class="last-checked">Last checked: March 2026</div>
+            </div>
+
+            <div class="plain-language">
+              <div class="plain-language-label">
+                <span data-lang="en">Plain language explanation</span>
+                <span data-lang="sv">Förklaring på klarspråk</span>
+                <span data-lang="ar">شرح بسيط</span>
+                <span data-lang="uk">Просте пояснення</span>
+              </div>
+              <p>
+                <span data-lang="en">Försäkringskassan (FK) handles parental leave, sick pay, child allowance, and other social benefits. Once you have a personnummer and are registered as living in Sweden, you may be entitled to these. You must register with FK separately — it does not happen automatically.</span>
+                <span data-lang="sv">Försäkringskassan hanterar föräldraledighet, sjuklön, barnbidrag och andra sociala förmåner. När du har ett personnummer och är folkbokförd i Sverige kan du ha rätt till dessa. Du måste anmäla dig till FK separat.</span>
+                <span data-lang="ar">تتعامل Försäkringskassan مع إجازة الوالدين وإعانات المرض وبدل الطفل. بمجرد حصولك على رقم شخصي، قد تكون مؤهلاً. يجب عليك التسجيل بشكل منفصل.</span>
+                <span data-lang="uk">FK займається декретними відпустками, лікарняними, дитячою допомогою. Після отримання personnummer ви можете мати право на ці пільги. Реєстрація відбувається окремо — не автоматично.</span>
+              </p>
+              <div class="plain-language-disclaimer">
+                <span data-lang="en">Simplified explanation only. Legally binding text at the official FK link above.</span>
+                <span data-lang="sv">Förenklad förklaring. Juridiskt bindande text i FK-länken ovan.</span>
+                <span data-lang="ar">شرح مبسط فقط.</span>
+                <span data-lang="uk">Лише спрощене пояснення.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn active">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script src="tools.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>

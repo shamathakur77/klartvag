@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Agency Staff — Klartväg</title>
+<meta name="description" content="Cross-agency intelligence portal for Migrationsverket, Skatteverket, Försäkringskassan, Arbetsförmedlingen and Säpo staff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <div class="topbar-flag"></div>
+    <span class="topbar-name">Klart<span>väg</span></span>
+  </a>
+  <div class="lang-bar">
+    <button class="lang-btn" onclick="setLang('sv')">SV</button>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">عر</button>
+    <button class="lang-btn" onclick="setLang('uk')">УК</button>
+  </div>
+</div>
+
+
+<div class="app page-enter">
+
+<div class="breadcrumb"><a href="index.html" class="bc-item"><span data-lang="en">Home</span><span data-lang="sv">Hem</span></a><span class="bc-sep">›</span><span class="bc-item current"><span data-lang="en">Government Agency Staff</span><span data-lang="sv">Myndighetsanställd</span></span></div>
+
+<div class="breadcrumb">
+      <span class="bc-item" onclick="window.location.href='home.html'">
+        <span data-lang="en">Home</span><span data-lang="sv">Hem</span>
+      </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-item current">
+        <span data-lang="en">Government Agency Staff</span>
+        <span data-lang="sv">Myndighetsanställd</span>
+      </span>
+    </div>
+
+    <div class="agency-banner">
+      <div class="agency-banner-dot"></div>
+      <div class="agency-banner-text">
+        <span data-lang="en"><strong>Agency staff view.</strong> This portal shows cross-agency case status, shared flags, and handoff points between Migrationsverket, Skatteverket, Försäkringskassan, Arbetsförmedlingen, and Säpo.</span>
+        <span data-lang="sv"><strong>Myndighetsvy.</strong> Denna portal visar tvärstatliga ärendestatusar, delade flaggor och överlämningspunkter mellan myndigheterna.</span>
+      </div>
+    </div>
+
+    <div class="agency-dash-grid">
+      <div class="agency-stat-card">
+        <div class="agency-stat-num">3,685</div>
+        <div class="agency-stat-label">Pending asylum cases<br><em>Migrationsverket — end of 2024</em></div>
+        <div class="agency-stat-trend trend-down">↓ from 5,229 (2023)</div>
+      </div>
+      <div class="agency-stat-card">
+        <div class="agency-stat-num">187</div>
+        <div class="agency-stat-label">Average days — asylum<br><em>2024 full year</em></div>
+        <div class="agency-stat-trend trend-down">↓ from 195 days (2023)</div>
+      </div>
+      <div class="agency-stat-card">
+        <div class="agency-stat-num">18</div>
+        <div class="agency-stat-label">Days avg — Category A<br><em>highly skilled workers, 2025</em></div>
+        <div class="agency-stat-trend trend-down">↓ from 100+ days (pre-2024)</div>
+      </div>
+      <div class="agency-stat-card">
+        <div class="agency-stat-num">915</div>
+        <div class="agency-stat-label">Fraud/abuse reports sent<br><em>to other agencies, 2025</em></div>
+        <div class="agency-stat-trend trend-up">↑ from 764 (2024)</div>
+      </div>
+    </div>
+
+    <div class="section-label">
+      <span data-lang="en">Cross-agency flags — actions required</span>
+      <span data-lang="sv">Tvärstatliga flaggor — åtgärder krävs</span>
+    </div>
+
+    <div class="flags-queue">
+      <div class="flags-queue-header">
+        <span>
+          <span data-lang="en">Shared intelligence queue — prototype data only</span>
+          <span data-lang="sv">Delad informationskö — endast prototypdata</span>
+        </span>
+        <span style="color: var(--warn);">
+          <span data-lang="en">3 items need attention</span>
+          <span data-lang="sv">3 poster behöver åtgärd</span>
+        </span>
+      </div>
+
+      <div class="flag-row">
+        <span class="flag-icon">⚠️</span>
+        <div class="flag-content">
+          <div class="flag-title">
+            <span data-lang="en">Content page updated at source — plain language may be outdated</span>
+            <span data-lang="sv">Innehållssida uppdaterad vid källan — klarspråk kan vara inaktuellt</span>
+          </div>
+          <div class="flag-detail">
+            <span data-lang="en">Migrationsverket page "Highly qualified workers" updated 14 Feb 2026. Plain language summary on Klartväg requires human review before clearing.</span>
+            <span data-lang="sv">Migrationsverkets sida "Högkvalificerade arbetstagare" uppdaterades 14 feb 2026. Klarspråkssammanfattning kräver mänsklig granskning.</span>
+          </div>
+        </div>
+        <div class="flag-agency">MIGRATIONSVERKET</div>
+      </div>
+
+      <div class="flag-row">
+        <span class="flag-icon">🔀</span>
+        <div class="flag-content">
+          <div class="flag-title">
+            <span data-lang="en">Handoff gap: Personnummer registration wait >45 days in Stockholm region</span>
+            <span data-lang="sv">Överlämningsgap: Personnummerregistrering >45 dagar i Stockholmsregionen</span>
+          </div>
+          <div class="flag-detail">
+            <span data-lang="en">Users progressing from step 3 (permit approved) to Skatteverket registration are experiencing longer than documented delays. Estimated-time disclaimer is displaying correctly. No user-facing change needed — flag for Skatteverket awareness.</span>
+            <span data-lang="sv">Användare som går från steg 3 till Skatteverket-registrering upplever längre förseningar än dokumenterat.</span>
+          </div>
+        </div>
+        <div class="flag-agency">SKATTEVERKET</div>
+      </div>
+
+      <div class="flag-row">
+        <span class="flag-icon">📋</span>
+        <div class="flag-content">
+          <div class="flag-title">
+            <span data-lang="en">New Arbetsförmedlingen intake process — not yet reflected in integration path</span>
+            <span data-lang="sv">Nytt Arbetsförmedlingen-intag — ännu ej reflekterat i integrationsvägen</span>
+          </div>
+          <div class="flag-detail">
+            <span data-lang="en">AF updated their new arrival registration process January 2026. The "Starting life in Sweden" path currently shows the previous flow. Requires content update before Klartväg goes live.</span>
+            <span data-lang="sv">AF uppdaterade sin registreringsprocess i januari 2026. "Börja livet i Sverige"-vägen visar fortfarande det gamla flödet.</span>
+          </div>
+        </div>
+        <div class="flag-agency">ARBETSFÖRMEDLINGEN</div>
+      </div>
+
+    </div>
+
+    <div class="situation-block">
+      <h2>
+        <span data-lang="en">Select your agency</span>
+        <span data-lang="sv">Välj din myndighet</span>
+      </h2>
+      <div class="sv-label">
+        <span data-lang="en">Each agency sees the same citizen journey — from their own vantage point, with their own handoff responsibilities highlighted.</span>
+        <span data-lang="sv">Varje myndighet ser samma medborgarresa — från sitt eget perspektiv, med sina egna överlämningsansvar markerade.</span>
+      </div>
+      <div class="option-chips" style="margin-top:16px">
+        <div class="chip selected">Migrationsverket</div>
+        <div class="chip">Skatteverket</div>
+        <div class="chip">Försäkringskassan</div>
+        <div class="chip">Arbetsförmedlingen</div>
+        <div class="chip">Säpo</div>
+      </div>
+      <div class="unknown-box" style="margin-top:16px">
+        <div class="unknown-label">
+          <span data-lang="en">Agency-specific views — prototype scope</span>
+          <span data-lang="sv">Myndighetsspecifika vyer — prototypens räckvidd</span>
+        </div>
+        <p>
+          <span data-lang="en">In the full system, each agency has a dedicated view showing: cases involving their agency at the current step, incoming handoffs from other agencies, and flags requiring their action. Säpo integration requires a separate legal data-sharing framework — outside prototype scope.</span>
+          <span data-lang="sv">I det fullständiga systemet har varje myndighet en dedikerad vy. Säpo-integration kräver ett separat juridiskt ramverk för datadelning.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="bnav-btn">
+    <span class="bnav-icon">⌂</span>
+    <span data-lang="en">Home</span><span data-lang="sv">Hem</span><span data-lang="ar">الرئيسية</span><span data-lang="uk">Головна</span>
+  </a>
+  <a href="employer.html" class="bnav-btn">
+    <span class="bnav-icon">🏢</span>
+    <span data-lang="en">Employer</span><span data-lang="sv">Arbetsgivare</span><span data-lang="ar">صاحب عمل</span><span data-lang="uk">Роботодавець</span>
+  </a>
+  <a href="asylum.html" class="bnav-btn">
+    <span class="bnav-icon">🏠</span>
+    <span data-lang="en">Asylum</span><span data-lang="sv">Asyl</span><span data-lang="ar">لجوء</span><span data-lang="uk">Притулок</span>
+  </a>
+  <a href="newlife.html" class="bnav-btn">
+    <span class="bnav-icon">🌱</span>
+    <span data-lang="en">New Life</span><span data-lang="sv">Nytt liv</span><span data-lang="ar">حياة جديدة</span><span data-lang="uk">Нове життя</span>
+  </a>
+  <a href="agency.html" class="bnav-btn active">
+    <span class="bnav-icon">⚖️</span>
+    <span data-lang="en">Agency</span><span data-lang="sv">Myndighet</span><span data-lang="ar">وكالة</span><span data-lang="uk">Агентство</span>
+  </a>
+</nav>
+
+<script src="shared.js"></script>
+<script>
+
+// Page-specific JS — chips, steps, employer tools, asylum tools
+const answers = {};
+function selectChip(el, q, val) {
+  el.closest('.option-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q] = val;
+  if (typeof onChipSelect === 'function') onChipSelect(q, val);
+  if (typeof checkReady === 'function') checkReady();
+  if (typeof checkEmpReady === 'function') checkEmpReady();
+}
+function toggleStep(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+</script>
+</body>
+</html>
